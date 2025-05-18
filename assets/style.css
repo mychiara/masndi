@@ -1,0 +1,671 @@
+/* assets/style.css */
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #007bff; /* Blue */
+    --secondary-color: #6c757d; /* Gray */
+    --accent-color: #17a2b8; /* Teal */
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Slightly softer shadow for general cards */
+    --card-hover-shadow: 0 6px 12px rgba(0,0,0,0.1);
+
+    --font-primary: 'Open Sans', sans-serif;
+    --font-headings: 'Montserrat', sans-serif;
+
+    --container-width: 1140px;
+    --spacing-unit: 1rem; /* 16px if base font-size is 16px */
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+    color: var(--dark-color);
+    margin-bottom: var(--spacing-unit);
+    line-height: 1.3;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+p { margin-bottom: var(--spacing-unit); }
+
+ul, ol {
+    margin-bottom: var(--spacing-unit);
+    padding-left: calc(var(--spacing-unit) * 1.5);
+}
+
+/* --- Layout --- */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-unit);
+    padding-right: var(--spacing-unit);
+}
+
+/* For pages WITHOUT sidebar (e.g., about, contact) */
+.page-content {
+    flex-grow: 1;
+    padding-top: calc(var(--spacing-unit) * 2);
+    padding-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* For pages WITH sidebar (e.g., index.html) */
+.page-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); /* Main content takes more space */
+    gap: calc(var(--spacing-unit) * 2);
+    padding-top: calc(var(--spacing-unit) * 2);
+    padding-bottom: calc(var(--spacing-unit) * 2);
+    flex-grow: 1; /* Ensure it takes up available space */
+}
+
+.main-content-area {
+    /* Primary content area within the page-wrapper */
+}
+
+/* --- Header --- */
+.site-header {
+    background-color: var(--card-bg);
+    padding: var(--spacing-unit) 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area .site-logo-link {
+    text-decoration: none;
+}
+.logo-area .site-title {
+    font-family: var(--font-headings);
+    font-size: 1.8rem;
+    color: var(--dark-color);
+    font-weight: 700;
+}
+.logo-area .site-tagline {
+    font-size: 0.85rem; /* MODIFIED: Slightly smaller */
+    color: var(--text-muted);
+    margin-top: 0.2rem; /* MODIFIED: Positive margin for separation */
+    margin-bottom: 0;
+    line-height: 1.4; /* ADDED: For better multi-line readability */
+    max-width: 450px; /* ADDED: Limit width of tagline if it's very long to prevent excessive wrapping */
+}
+
+.nav-menu .nav-link {
+    color: var(--dark-color);
+    padding: 0.4rem 0.8rem; /* MODIFIED: Adjusted padding */
+    margin-left: 0.4rem; /* MODIFIED: Adjusted margin */
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem; /* ADDED: Reduced font size */
+}
+
+.nav-menu .nav-link:hover,
+.nav-menu .nav-link.active {
+    color: var(--primary-color);
+    background-color: rgba(0,123,255,0.1);
+}
+
+.nav-toggler {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.nav-toggler span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--dark-color);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- Main Content & Page Sections --- */
+.section-title { /* Used in featured posts and potentially other sections */
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    padding-bottom: calc(var(--spacing-unit) * 0.5);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    font-size: 1.75rem; /* Slightly smaller than H2 for section titles */
+}
+
+.page-header-section { /* For static pages like About, Contact */
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+.page-main-title {
+    font-size: 2.8rem;
+    color: var(--dark-color);
+}
+.content-section { /* Wrapper for main content on static pages */
+    background-color: var(--card-bg);
+    padding: calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+}
+.content-section h2 { /* Headings within static page content */
+    margin-top: calc(var(--spacing-unit) * 1.5);
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    color: var(--primary-color);
+}
+
+/* --- Featured Posts Grid (index.html) --- */
+.featured-posts {
+    /* Container for the featured articles grid */
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for desktop */
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+.article-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.article-card .article-image img {
+    width: 100%;
+    height: 180px; /* Adjusted height for 3-column layout */
+    object-fit: cover;
+}
+
+.article-card .article-content {
+    padding: calc(var(--spacing-unit) * 0.85); /* Adjusted padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.article-card .article-title {
+    font-size: 1.15rem; /* Adjusted for "smaller" cards */
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+.article-card .article-title a {
+    color: var(--dark-color);
+    text-decoration: none;
+}
+.article-card .article-title a:hover {
+    color: var(--primary-color);
+}
+
+.article-card .excerpt {
+    font-size: 0.875rem; /* Adjusted for "smaller" cards */
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-unit);
+    flex-grow: 1;
+    line-height: 1.5;
+}
+
+.article-card .read-more {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-top: auto; /* Pushes to bottom if content above is short */
+}
+.article-card .read-more:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
+
+/* --- All Posts List (Example for a potential archive page - not explicitly on index.html) --- */
+.all-posts { /* This class is not used in the provided index.html, but good to have for other pages */
+    margin-top: calc(var(--spacing-unit) * 3);
+}
+
+.posts-list .post-list-item {
+    background-color: var(--card-bg);
+    padding: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.post-list-item:last-child {
+    margin-bottom: 0;
+}
+
+.post-list-item .post-list-content {
+    flex-grow: 1;
+}
+
+.post-list-item .post-list-title {
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--spacing-unit) * 0.25);
+}
+.post-list-item .post-list-title a {
+    color: var(--dark-color);
+}
+.post-list-item .post-list-title a:hover {
+    color: var(--primary-color);
+}
+.post-list-item .post-list-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.post-list-item .post-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: right;
+    margin-left: var(--spacing-unit);
+    flex-shrink: 0;
+}
+.post-list-item .post-meta .read-more-list {
+    display: block;
+    margin-top: 0.25rem;
+    font-weight: 600;
+}
+
+/* --- Sidebar Area (index.html) --- */
+.sidebar-area {
+    background-color: var(--card-bg);
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+    height: fit-content; /* So it doesn't stretch full height if content is short */
+}
+
+.author-profile-sidebar {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    padding-bottom: calc(var(--spacing-unit) * 1.5);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.author-image-sidebar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto calc(var(--spacing-unit) * 0.75);
+    border: 3px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.author-name-sidebar {
+    font-family: var(--font-headings);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.author-bio-sidebar {
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.sidebar-title {
+    font-size: 1.4rem;
+    color: var(--dark-color);
+    margin-bottom: calc(var(--spacing-unit) * 1.25);
+    padding-bottom: calc(var(--spacing-unit) * 0.5);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+}
+
+.post-list-item-sidebar {
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    padding-bottom: calc(var(--spacing-unit) * 0.75);
+    border-bottom: 1px solid var(--border-color);
+}
+.post-list-item-sidebar:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.post-list-title-sidebar { /* Class ini yang penting untuk <h3> */
+    font-size: 0.875rem; /* Ukuran font lebih kecil */
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing-unit) * 0.2);
+    line-height: 1.3;
+}
+.post-list-title-sidebar a {
+    color: var(--dark-color); /* Warna font gelap untuk link */
+    text-decoration: none;
+}
+.post-list-title-sidebar a:hover {
+    color: var(--primary-color); /* Warna biru saat hover */
+}
+
+.post-meta-sidebar {
+    font-size: 0.75rem; /* Ukuran font kecil untuk tanggal */
+    color: var(--text-muted);
+}
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: calc(var(--spacing-unit) * 2) 0;
+    margin-top: auto; /* Pushes footer to bottom */
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-nav a {
+    color: var(--light-color);
+    margin: 0 0.75rem;
+    font-size: 0.9rem;
+}
+.footer-nav a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+.footer-nav {
+    margin-bottom: var(--spacing-unit);
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0;
+}
+
+/* --- Contact Form (Basic Styling) --- */
+.contact-form .form-group {
+    margin-bottom: var(--spacing-unit);
+}
+.contact-form label {
+    display: block;
+    margin-bottom: calc(var(--spacing-unit) * 0.25);
+    font-weight: 600;
+}
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: calc(var(--spacing-unit) * 0.75);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+}
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.contact-form .btn-submit {
+    background-color: var(--primary-color);
+    color: white;
+    padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+.contact-form .btn-submit:hover {
+    background-color: #0056b3;
+}
+.form-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: var(--spacing-unit);
+    font-style: italic;
+}
+
+/* --- Responsive Design --- */
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .container {
+        max-width: 960px;
+    }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    .page-main-title { font-size: 2.4rem; }
+    .section-title { font-size: 1.6rem; }
+    .sidebar-title { font-size: 1.3rem; }
+    .author-name-sidebar { font-size: 1.1rem; } /* Responsive adjustment */
+
+
+    .page-wrapper { /* Sidebar stacks below main content */
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing-unit) * 2);
+    }
+    .sidebar-area {
+        margin-top: calc(var(--spacing-unit) * 2); /* Space when stacked */
+    }
+
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for featured articles on tablets */
+    }
+    .article-card .article-image img {
+        height: 190px;
+    }
+
+    .logo-area .site-tagline {
+        max-width: 100%; /* Allow tagline to use full width available */
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .header-content {
+        flex-wrap: wrap; /* Allow tagline to wrap below title if needed */
+    }
+    .logo-area {
+        flex-basis: 100%; /* Ensure logo area takes full width initially */
+        margin-bottom: calc(var(--spacing-unit) * 0.5); /* Space between logo area and nav toggler */
+    }
+     .logo-area .site-tagline {
+        font-size: 0.8rem; /* Slightly smaller tagline on mobile */
+    }
+
+    /* Mobile Navigation */
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--card-bg);
+        position: absolute;
+        top: calc(100% + var(--spacing-unit) * 0.5); /* Adjust based on header height and tagline */
+        left: 0;
+        right: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: var(--spacing-unit) 0;
+        border-top: 1px solid var(--border-color);
+        z-index: 999; /* Ensure it's above content but below sticky header */
+    }
+    .nav-menu.active {
+        display: flex;
+    }
+    .nav-menu .nav-link {
+        padding: 0.75rem var(--spacing-unit);
+        margin-left: 0;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1rem; /* Make nav links slightly larger for mobile tap targets */
+    }
+    .nav-menu .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .nav-toggler {
+        display: block;
+        position: absolute; /* Position toggler relative to header-content */
+        top: calc(var(--spacing-unit) / 2); /* Adjust vertical alignment */
+        right: var(--spacing-unit);
+    }
+    .nav-toggler.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav-toggler.active span:nth-child(2) { opacity: 0; }
+    .nav-toggler.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+    /* Content Adjustments for Small Screens */
+    .posts-grid {
+        grid-template-columns: 1fr; /* Single column for featured articles on mobile */
+    }
+    .article-card .article-image img {
+        height: 200px;
+    }
+    .article-card .article-title { font-size: 1.25rem; }
+    .article-card .excerpt { font-size: 0.9rem; }
+
+
+    .post-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .post-list-item .post-meta {
+        text-align: left;
+        margin-left: 0;
+        margin-top: calc(var(--spacing-unit) * 0.5);
+        width: 100%;
+    }
+    .post-list-item .post-meta .read-more-list {
+         display: inline-block;
+         margin-left: var(--spacing-unit);
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    .page-main-title { font-size: 2rem; }
+    .section-title { font-size: 1.5rem; }
+    .sidebar-title { font-size: 1.2rem; }
+    .author-name-sidebar { font-size: 1rem; } /* Responsive adjustment */
+
+
+    .post-list-title-sidebar { font-size: 0.9rem; } /* Slightly larger on mobile if desired, or keep consistent */
+    .post-meta-sidebar { font-size: 0.8rem; } /* Keep readable on mobile */
+
+
+    .footer-content {
+        align-items: center;
+    }
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-nav a {
+        margin: 0.25rem 0;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .site-header {
+        padding-bottom: calc(var(--spacing-unit) * 0.5); /* Add some padding if tagline wraps too close to border */
+    }
+    .logo-area .site-title {
+        font-size: 1.5rem;
+    }
+    .logo-area .site-tagline {
+        font-size: 0.75rem; /* Even smaller tagline */
+        line-height: 1.3;
+    }
+
+    .nav-menu { /* Ensure nav menu positioning is correct on small screens with wrapped tagline */
+         top: calc(100% + var(--spacing-unit) * 0.25); /* Fine tune this value */
+    }
+
+    .article-card .article-title {
+        font-size: 1.2rem;
+    }
+    .post-list-item .post-list-title {
+        font-size: 1.1rem;
+    }
+    .author-image-sidebar { /* Slightly smaller author image on very small screens */
+        width: 80px;
+        height: 80px;
+    }
+    /* Keep sidebar text legible on very small screens, it might already be small enough */
+    /* .post-list-title-sidebar { font-size: 0.875rem; } */
+    /* .post-meta-sidebar { font-size: 0.75rem; } */
+}
