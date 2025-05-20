@@ -18,18 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Akhir Bagian Navigasi dan Tahun ---
 
     // --- Logika Artikel Unggulan ---
-    const allArticles = [
+    console.log("[Masandigital Script] Memulai script untuk memuat artikel unggulan...");
+
+    const allArticles = [ // PASTIKAN title, excerpt, dan altText diisi dengan benar!
         {
             slug: "activity-hotels-for-families-in-the-uk-a-comprehensive-guide",
-            title: "Activity Hotels for Families in the UK: A Comprehensive Guide", // GANTI DENGAN JUDUL SEBENARNYA
-            excerpt: "Discover the best activity hotels in the UK, perfect for unforgettable family adventures and fun-filled stays...", // GANTI DENGAN KUTIPAN SEBENARNYA
-            altText: "Family enjoying activities at a hotel in the UK" // GANTI DENGAN ALT TEXT SEBENARNYA
+            title: "Activity Hotels for Families in the UK: A Comprehensive Guide",
+            excerpt: "Discover the best activity hotels in the UK, perfect for unforgettable family adventures and fun-filled stays...",
+            altText: "Family enjoying activities at a hotel in the UK"
         },
         {
             slug: "adventure-getaway-destinations-a-comprehensive-guide",
-            title: "Adventure Getaway Destinations: A Comprehensive Guide", // GANTI
-            excerpt: "Explore breathtaking adventure getaway destinations for thrill-seekers and explorers alike. Your next journey starts here...", // GANTI
-            altText: "Scenic view of an adventure destination with mountains and lakes" // GANTI
+            title: "Adventure Getaway Destinations: A Comprehensive Guide",
+            excerpt: "Explore breathtaking adventure getaway destinations for thrill-seekers and explorers alike. Your next journey starts here...",
+            altText: "Scenic view of an adventure destination with mountains and lakes"
         },
         {
             slug: "best-adventure-places-in-the-world-a-connoisseurs-guide",
@@ -51,69 +53,69 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             slug: "cheap-activity-holidays-uk-a-comprehensive-guide",
-            title: "Cheap Activity Holidays UK: A Comprehensive Guide", // GANTI
-            excerpt: "Enjoy exciting and affordable activity holidays across the UK. Discover budget-friendly options for adventure...", // GANTI
-            altText: "Group of friends on a budget-friendly hike in the UK" // GANTI
+            title: "Cheap Activity Holidays UK: A Comprehensive Guide",
+            excerpt: "Enjoy exciting and affordable activity holidays across the UK. Discover budget-friendly options for adventure...",
+            altText: "Group of friends on a budget-friendly hike in the UK"
         },
         {
             slug: "cheap-adventure-holidays-europe-a-comprehensive-guide",
-            title: "Cheap Adventure Holidays Europe: A Comprehensive Guide", // GANTI
-            excerpt: "Explore Europe's thrilling adventures without breaking the bank. This guide covers budget-friendly options...", // GANTI
-            altText: "Backpacker looking at a map in a European city square" // GANTI
+            title: "Cheap Adventure Holidays Europe: A Comprehensive Guide",
+            excerpt: "Explore Europe's thrilling adventures without breaking the bank. This guide covers budget-friendly options...",
+            altText: "Backpacker looking at a map in a European city square"
         },
         {
             slug: "east-coast-adventure-trips-a-comprehensive-guide",
-            title: "East Coast Adventure Trips: A Comprehensive Guide", // GANTI
-            excerpt: "Discover the best adventure trips along the US East Coast, from serene trails to exciting water sports and vibrant cities...", // GANTI
-            altText: "Kayaking along a scenic East Coast shoreline at sunset" // GANTI
+            title: "East Coast Adventure Trips: A Comprehensive Guide",
+            excerpt: "Discover the best adventure trips along the US East Coast, from serene trails to exciting water sports and vibrant cities...",
+            altText: "Kayaking along a scenic East Coast shoreline at sunset"
         },
         {
             slug: "east-coast-adventure-vacations-a-comprehensive-guide",
-            title: "East Coast Adventure Vacations: A Comprehensive Guide", // GANTI
-            excerpt: "Plan your next unforgettable adventure vacation on the East Coast with this detailed guide to top spots and activities...", // GANTI
-            altText: "Couple hiking on a picturesque East Coast trail" // GANTI
+            title: "East Coast Adventure Vacations: A Comprehensive Guide",
+            excerpt: "Plan your next unforgettable adventure vacation on the East Coast with this detailed guide to top spots and activities...",
+            altText: "Couple hiking on a picturesque East Coast trail"
         },
         {
             slug: "exploring-holidays-for-couples-a-comprehensive-guide",
-            title: "Exploring Holidays for Couples: A Comprehensive Guide", // GANTI
-            excerpt: "Find the perfect romantic and adventurous holiday destinations for couples, from city breaks to secluded getaways...", // GANTI
-            altText: "Couple enjoying a scenic ocean view during their holiday" // GANTI
+            title: "Exploring Holidays for Couples: A Comprehensive Guide",
+            excerpt: "Find the perfect romantic and adventurous holiday destinations for couples, from city breaks to secluded getaways...",
+            altText: "Couple enjoying a scenic ocean view during their holiday"
         },
         {
             slug: "family-activity-holidays-england-a-comprehensive-guide",
-            title: "Family Activity Holidays England: A Comprehensive Guide", // GANTI
-            excerpt: "Discover fun-filled family activity holidays across England, perfect for creating lasting memories and shared experiences...", // GANTI
-            altText: "Family exploring a historic castle grounds in England" // GANTI
+            title: "Family Activity Holidays England: A Comprehensive Guide",
+            excerpt: "Discover fun-filled family activity holidays across England, perfect for creating lasting memories and shared experiences...",
+            altText: "Family exploring a historic castle grounds in England"
         },
         {
             slug: "family-activity-weekend-breaks-a-comprehensive-guide",
-            title: "Family Activity Weekend Breaks: A Comprehensive Guide", // GANTI
-            excerpt: "Plan a memorable and action-packed weekend getaway for the whole family with these great ideas for quick escapes...", // GANTI
-            altText: "Family cycling together on a scenic trail during a weekend break" // GANTI
+            title: "Family Activity Weekend Breaks: A Comprehensive Guide",
+            excerpt: "Plan a memorable and action-packed weekend getaway for the whole family with these great ideas for quick escapes...",
+            altText: "Family cycling together on a scenic trail during a weekend break"
         },
         {
             slug: "family-activity-weekend-breaks-uk-a-comprehensive-guide",
-            title: "Family Activity Weekend Breaks UK: A Comprehensive Guide", // GANTI
-            excerpt: "Make the most of your weekend with exciting family activity breaks available throughout the UK for all ages...", // GANTI
-            altText: "Children enjoying a climbing wall activity during a UK weekend break" // GANTI
+            title: "Family Activity Weekend Breaks UK: A Comprehensive Guide",
+            excerpt: "Make the most of your weekend with exciting family activity breaks available throughout the UK for all ages...",
+            altText: "Children enjoying a climbing wall activity during a UK weekend break"
         },
         {
             slug: "family-adventure-breaks-uk-a-comprehensive-guide",
-            title: "Family Adventure Breaks UK: A Comprehensive Guide", // GANTI
-            excerpt: "Discover thrilling adventure breaks across the UK suitable for the entire family. Plan your next exciting escape...", // GANTI
-            altText: "Family zip-lining through a forest in the UK" // GANTI
+            title: "Family Adventure Breaks UK: A Comprehensive Guide",
+            excerpt: "Discover thrilling adventure breaks across the UK suitable for the entire family. Plan your next exciting escape...",
+            altText: "Family zip-lining through a forest in the UK"
         },
         {
             slug: "family-sports-holidays-europe-a-comprehensive-guide",
-            title: "Family Sports Holidays Europe: A Comprehensive Guide", // GANTI
-            excerpt: "Combine your love for sports with a family vacation in Europe. Explore top destinations and activities for active families...", // GANTI
-            altText: "Family playing beach volleyball on a European coast" // GANTI
+            title: "Family Sports Holidays Europe: A Comprehensive Guide",
+            excerpt: "Combine your love for sports with a family vacation in Europe. Explore top destinations and activities for active families...",
+            altText: "Family playing beach volleyball on a European coast"
         },
         {
             slug: "great-family-holidays-abroad-a-comprehensive-guide",
-            title: "Great Family Holidays Abroad: A Comprehensive Guide", // GANTI
-            excerpt: "Find the perfect international destination for your next family vacation with our detailed guide to amazing experiences...", // GANTI
-            altText: "Family posing happily on a beautiful beach during an international holiday" // GANTI
+            title: "Great Family Holidays Abroad: A Comprehensive Guide",
+            excerpt: "Find the perfect international destination for your next family vacation with our detailed guide to amazing experiences...",
+            altText: "Family posing happily on a beautiful beach during an international holiday"
         },
         {
             slug: "hotels-with-activities-for-families-a-comprehensive-guide",
@@ -123,15 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             slug: "kids-activity-holidays-uk-a-comprehensive-guide",
-            title: "Kids Activity Holidays UK: A Comprehensive Guide", // GANTI
-            excerpt: "Keep your children entertained and active with these fantastic kid-friendly holiday options and activity centers in the UK...", // GANTI
-            altText: "Children participating in an outdoor adventure course in the UK" // GANTI
+            title: "Kids Activity Holidays UK: A Comprehensive Guide",
+            excerpt: "Keep your children entertained and active with these fantastic kid-friendly holiday options and activity centers in the UK...",
+            altText: "Children participating in an outdoor adventure course in the UK"
         },
         {
             slug: "organized-trips-for-young-adults-a-comprehensive-guide",
-            title: "Organized Trips for Young Adults: A Comprehensive Guide", // GANTI
-            excerpt: "Discover exciting and well-planned trips tailored for young adults seeking adventure, culture, and new experiences...", // GANTI
-            altText: "Group of young adults taking a selfie on an organized tour in a city" // GANTI
+            title: "Organized Trips for Young Adults: A Comprehensive Guide",
+            excerpt: "Discover exciting and well-planned trips tailored for young adults seeking adventure, culture, and new experiences...",
+            altText: "Group of young adults taking a selfie on an organized tour in a city"
         }
     ];
 
@@ -145,9 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createArticleCardHTML(article, index) {
         const postUrl = `posts/${article.slug}.html`;
-        const webpImageSrc = `assets/images/${article.slug}-featured.webp`; // Path relatif
-        const jpgImageSrc = `assets/images/${article.slug}-featured.jpg`;   // Path relatif
+        const webpImageSrc = `assets/images/${article.slug}-featured.webp`;
+        const jpgImageSrc = `assets/images/${article.slug}-featured.jpg`;
         const articleId = `article-title-featured-${index + 1}`;
+
+        // Logging untuk membantu debugging path gambar
+        console.log(`[Masandigital Script] Artikel: "${article.title}"`);
+        console.log(`  -> Mencoba memuat WebP: ${window.location.origin}/${webpImageSrc}`);
+        console.log(`  -> Mencoba memuat JPG: ${window.location.origin}/${jpgImageSrc}`);
+
 
         return `
             <article class="article-card" aria-labelledby="${articleId}">
@@ -156,13 +164,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         <picture>
                             <source srcset="${webpImageSrc}" type="image/webp">
                             <source srcset="${jpgImageSrc}" type="image/jpeg">
-                            <img src="${jpgImageSrc}" alt="${article.altText}" width="360" height="180" loading="lazy">
+                            <img src="${jpgImageSrc}" 
+                                 alt="${article.altText || 'Featured image for ' + article.title}" 
+                                 width="360" height="180" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<div style=\\'width:360px;height:180px;background:#eee;display:flex;align-items:center;justify-content:center;color:#888;text-align:center;\\'>Image not found: <br/>${jpgImageSrc.split('/').pop()}</div>'; console.error('Gagal memuat gambar: ${jpgImageSrc}');">
                         </picture>
                     </a>
                 </div>
                 <div class="article-content">
                     <h3 class="article-title" id="${articleId}"><a href="${postUrl}">${article.title}</a></h3>
-                    <p class="excerpt">${article.excerpt}</p>
+                    <p class="excerpt">${article.excerpt || 'Read more about this topic.'}</p>
                     <a href="${postUrl}" class="read-more">Read More <span class="visually-hidden">about ${article.title}</span>→</a>
                 </div>
             </article>
@@ -173,14 +184,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (allArticles.length > 0) {
             featuredPostsContainer.innerHTML = ''; // Kosongkan konten statis
             const randomArticles = getRandomArticles(allArticles, numberOfFeaturedPosts);
+            console.log(`[Masandigital Script] Menampilkan ${randomArticles.length} artikel unggulan.`);
             randomArticles.forEach((article, index) => {
                 featuredPostsContainer.innerHTML += createArticleCardHTML(article, index);
             });
         } else {
             featuredPostsContainer.innerHTML = '<p>No featured articles to display at the moment.</p>';
+            console.warn("[Masandigital Script] Tidak ada artikel yang didefinisikan dalam 'allArticles'.");
         }
     } else {
-        console.error('Error: Featured posts container (.featured-posts .posts-grid) not found.');
+        console.error('[Masandigital Script] Kesalahan: Kontainer artikel unggulan (.featured-posts .posts-grid) tidak ditemukan di DOM.');
     }
+    console.log("[Masandigital Script] Script artikel unggulan selesai dijalankan.");
     // --- Akhir Logika Artikel Unggulan ---
 });
