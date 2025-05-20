@@ -19,14 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("[Masandigital Debug] Script dimulai. Mengecek elemen dasar...");
 
+    // --- Logika Artikel Unggulan (Featured Articles) ---
     const featuredPostsContainer = document.querySelector('.featured-posts .posts-grid');
     if (!featuredPostsContainer) {
-        console.error('[Masandigital Debug] KRITIS: Kontainer .featured-posts .posts-grid TIDAK DITEMUKAN. Artikel tidak bisa ditampilkan.');
-        return; // Hentikan jika kontainer utama tidak ada
+        console.error('[Masandigital Debug] KRITIS: Kontainer .featured-posts .posts-grid TIDAK DITEMUKAN. Artikel unggulan tidak bisa ditampilkan.');
+    } else {
+        console.log("[Masandigital Debug] Kontainer .featured-posts .posts-grid ditemukan.");
     }
-    console.log("[Masandigital Debug] Kontainer .featured-posts .posts-grid ditemukan.");
 
-    const allArticles = [ // PASTIKAN title, excerpt, dan altText diisi dengan benar!
+    const allArticlesData = [ // Data untuk artikel unggulan dan bisa juga untuk sidebar jika diperlukan
+        // PASTIKAN SEMUA DATA INI BENAR DAN SESUAI DENGAN ARTIKEL ANDA
         {
             slug: "activity-hotels-for-families-in-the-uk-a-comprehensive-guide",
             title: "Activity Hotels for Families in the UK: A Comprehensive Guide",
@@ -144,110 +146,138 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const numberOfFeaturedPosts = 12;
-    const siteBaseUrl = window.location.origin; // e.g., "https://masandigital.com"
+    const siteBaseUrl = window.location.origin;
 
     console.log(`[Masandigital Debug] Base URL situs: ${siteBaseUrl}`);
-    console.log(`[Masandigital Debug] Jumlah artikel terdefinisi: ${allArticles.length}`);
+    console.log(`[Masandigital Debug] Jumlah artikel terdefinisi untuk data: ${allArticlesData.length}`);
 
-    function getRandomArticles(articles, count) {
-        const shuffled = [...articles].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, Math.min(count, shuffled.length));
+    function shuffleArray(array) {
+        const newArray = [...array]; // Buat salinan agar tidak mengubah array asli
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // Tukar elemen
+        }
+        return newArray;
     }
 
-    function createArticleCardHTML(article, index) {
-        const postUrl = `${siteBaseUrl}/posts/${article.slug}.html`; // Path absolut untuk link artikel
-        
-        // Membuat path absolut untuk gambar dari root domain
-        const webpImageSrc = `${siteBaseUrl}/assets/images/${article.slug}-featured.webp`;
-        const jpgImageSrc = `${siteBaseUrl}/assets/images/${article.slug}-featured.jpg`;
-        
-        const articleId = `article-title-featured-${index + 1}`;
+    // Fungsi untuk Artikel Unggulan
+    function displayFeaturedArticles() {
+        if (!featuredPostsContainer) return; // Keluar jika kontainer tidak ada
 
-        console.log(`[Masandigital Debug] Memproses Artikel: "${article.title}" (slug: ${article.slug})`);
-        console.log(`  -> URL WebP yang akan digunakan: ${webpImageSrc}`);
-        console.log(`  -> URL JPG yang akan digunakan: ${jpgImageSrc}`);
-        console.log(`  -> URL Post: ${postUrl}`);
+        function createFeaturedArticleCardElement(article) {
+            const postUrl = `${siteBaseUrl}/posts/${article.slug}.html`;
+            const webpImageSrc = `${siteBaseUrl}/assets/images/${article.slug}-featured.webp`;
+            const jpgImageSrc = `${siteBaseUrl}/assets/images/${article.slug}-featured.jpg`;
+            const articleId = `article-title-featured-${article.slug.substring(0,10)}-${Math.random().toString(36).substring(2, 7)}`;
 
-        // Fungsi untuk error handler gambar
-        const handleError = (imgElement, attemptedSrc) => {
-            console.error(`[Masandigital Debug] GAGAL MEMUAT GAMBAR: ${attemptedSrc}. Slug: ${article.slug}`);
-            const parentDiv = imgElement.closest('.article-image');
-            if (parentDiv) {
-                parentDiv.innerHTML = `<div style="width:100%; aspect-ratio: 2/1; background:#f0f0f0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#777; text-align:center; border:1px solid #ddd; box-sizing:border-box; padding:10px; font-size:0.9em;">
-                                        <p style="margin:0 0 5px 0; font-weight:bold;">Image not found</p>
-                                        <p style="margin:0; word-break:break-all;">${attemptedSrc.split('/').pop()}</p>
-                                     </div>`;
-            }
-        };
-        
-        // Membuat elemen gambar secara dinamis untuk kontrol error yang lebih baik
-        const pictureElement = document.createElement('picture');
-        
-        const sourceWebp = document.createElement('source');
-        sourceWebp.srcset = webpImageSrc;
-        sourceWebp.type = 'image/webp';
-        
-        const sourceJpg = document.createElement('source'); // Fallback kedua jika webp gagal dan jpg juga gagal di <source>
-        sourceJpg.srcset = jpgImageSrc;
-        sourceJpg.type = 'image/jpeg';
 
-        const imgElement = document.createElement('img');
-        imgElement.src = jpgImageSrc; // Default src
-        imgElement.alt = article.altText || `Featured image for ${article.title}`;
-        imgElement.width = 360;
-        imgElement.height = 180;
-        imgElement.loading = 'lazy';
-        imgElement.onerror = () => handleError(imgElement, imgElement.src); // Error pada <img> utama
+            console.log(`[Masandigital Debug FEATURED] Memproses Artikel: "${article.title}" (slug: ${article.slug})`);
+            console.log(`  -> URL WebP: ${webpImageSrc}`);
+            console.log(`  -> URL JPG: ${jpgImageSrc}`);
 
-        sourceWebp.onerror = () => { // Jika <source webp> gagal, browser akan coba <source jpg> atau <img>. Ini untuk logging.
-            console.warn(`[Masandigital Debug] Gagal memuat source WebP: ${webpImageSrc} untuk slug: ${article.slug}. Mencoba JPG.`);
-        };
+            const handleError = (imgElement, attemptedSrc) => {
+                console.error(`[Masandigital Debug FEATURED] GAGAL MEMUAT GAMBAR: ${attemptedSrc}. Slug: ${article.slug}`);
+                const parentDiv = imgElement.closest('.article-image');
+                if (parentDiv) {
+                    parentDiv.innerHTML = `<div style="width:100%; aspect-ratio: 2/1; background:#f0f0f0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#777; text-align:center; border:1px solid #ddd; box-sizing:border-box; padding:10px; font-size:0.9em;">
+                                            <p style="margin:0 0 5px 0; font-weight:bold;">Image not found</p>
+                                            <p style="margin:0; word-break:break-all;">${attemptedSrc.split('/').pop()}</p>
+                                         </div>`;
+                }
+            };
+            
+            const pictureElement = document.createElement('picture');
+            const sourceWebp = document.createElement('source');
+            sourceWebp.srcset = webpImageSrc;
+            sourceWebp.type = 'image/webp';
+            const sourceJpg = document.createElement('source');
+            sourceJpg.srcset = jpgImageSrc;
+            sourceJpg.type = 'image/jpeg';
+            const imgElement = document.createElement('img');
+            imgElement.src = jpgImageSrc;
+            imgElement.alt = article.altText || `Featured image for ${article.title}`;
+            imgElement.width = 360;
+            imgElement.height = 180;
+            imgElement.loading = 'lazy';
+            imgElement.onerror = () => handleError(imgElement, imgElement.src);
 
-        pictureElement.appendChild(sourceWebp);
-        pictureElement.appendChild(sourceJpg); // Tambahkan source JPG sebelum img
-        pictureElement.appendChild(imgElement);
+            pictureElement.appendChild(sourceWebp);
+            pictureElement.appendChild(sourceJpg);
+            pictureElement.appendChild(imgElement);
 
-        // Membuat string HTML untuk kartu artikel
-        // Kita akan memasukkan elemen gambar yang sudah dibuat ke dalamnya nanti
-        // Untuk sementara, kita buat placeholder untuk div gambar.
-        const articleCardDiv = document.createElement('article');
-        articleCardDiv.className = 'article-card';
-        articleCardDiv.setAttribute('aria-labelledby', articleId);
+            const articleCardDiv = document.createElement('article');
+            articleCardDiv.className = 'article-card';
+            articleCardDiv.setAttribute('aria-labelledby', articleId);
 
-        const articleImageDiv = document.createElement('div');
-        articleImageDiv.className = 'article-image';
-        const linkImage = document.createElement('a');
-        linkImage.href = postUrl;
-        linkImage.appendChild(pictureElement); // Masukkan elemen <picture> yang sudah dibuat
-        articleImageDiv.appendChild(linkImage);
-        
-        const articleContentDiv = document.createElement('div');
-        articleContentDiv.className = 'article-content';
-        articleContentDiv.innerHTML = `
-            <h3 class="article-title" id="${articleId}"><a href="${postUrl}">${article.title}</a></h3>
-            <p class="excerpt">${article.excerpt || 'Read more about this topic.'}</p>
-            <a href="${postUrl}" class="read-more">Read More <span class="visually-hidden">about ${article.title}</span>→</a>
-        `;
+            const articleImageDiv = document.createElement('div');
+            articleImageDiv.className = 'article-image';
+            const linkImage = document.createElement('a');
+            linkImage.href = postUrl;
+            linkImage.appendChild(pictureElement);
+            articleImageDiv.appendChild(linkImage);
+            
+            const articleContentDiv = document.createElement('div');
+            articleContentDiv.className = 'article-content';
+            articleContentDiv.innerHTML = `
+                <h3 class="article-title" id="${articleId}"><a href="${postUrl}">${article.title}</a></h3>
+                <p class="excerpt">${article.excerpt || 'Read more about this topic.'}</p>
+                <a href="${postUrl}" class="read-more">Read More <span class="visually-hidden">about ${article.title}</span>→</a>
+            `;
 
-        articleCardDiv.appendChild(articleImageDiv);
-        articleCardDiv.appendChild(articleContentDiv);
-        
-        return articleCardDiv; // Mengembalikan elemen DOM, bukan string HTML
+            articleCardDiv.appendChild(articleImageDiv);
+            articleCardDiv.appendChild(articleContentDiv);
+            return articleCardDiv;
+        }
+
+        if (allArticlesData.length > 0) {
+            featuredPostsContainer.innerHTML = '';
+            const randomArticlesForFeatured = shuffleArray(allArticlesData).slice(0, numberOfFeaturedPosts);
+            console.log(`[Masandigital Debug FEATURED] Akan menampilkan ${randomArticlesForFeatured.length} artikel unggulan.`);
+            
+            randomArticlesForFeatured.forEach(article => {
+                const cardElement = createFeaturedArticleCardElement(article);
+                featuredPostsContainer.appendChild(cardElement);
+            });
+            console.log("[Masandigital Debug FEATURED] Semua kartu artikel unggulan telah ditambahkan ke DOM.");
+        } else {
+            featuredPostsContainer.innerHTML = '<p>No featured articles to display at the moment.</p>';
+            console.warn("[Masandigital Debug FEATURED] Tidak ada artikel yang didefinisikan dalam 'allArticlesData'.");
+        }
     }
 
-    if (allArticles.length > 0) {
-        featuredPostsContainer.innerHTML = ''; // Kosongkan konten statis
-        const randomArticles = getRandomArticles(allArticles, numberOfFeaturedPosts);
-        console.log(`[Masandigital Debug] Akan menampilkan ${randomArticles.length} artikel unggulan.`);
+    // --- Logika Acak "All Articles" di Sidebar ---
+    function randomizeSidebarArticles() {
+        const sidebarPostsListContainer = document.querySelector('.all-posts-sidebar .posts-list-sidebar');
+        if (!sidebarPostsListContainer) {
+            console.warn('[Masandigital Debug SIDEBAR] Kontainer .posts-list-sidebar TIDAK DITEMUKAN. Tidak bisa mengacak artikel sidebar.');
+            return;
+        }
+        console.log("[Masandigital Debug SIDEBAR] Kontainer .posts-list-sidebar ditemukan.");
+
+        const sidebarItems = Array.from(sidebarPostsListContainer.querySelectorAll('.post-list-item-sidebar'));
         
-        randomArticles.forEach((article, index) => {
-            const cardElement = createArticleCardHTML(article, index);
-            featuredPostsContainer.appendChild(cardElement); // Tambahkan elemen DOM ke kontainer
+        if (sidebarItems.length === 0) {
+            console.log("[Masandigital Debug SIDEBAR] Tidak ada item .post-list-item-sidebar ditemukan di sidebar.");
+            return;
+        }
+        console.log(`[Masandigital Debug SIDEBAR] Ditemukan ${sidebarItems.length} item artikel di sidebar.`);
+
+        const shuffledSidebarItems = shuffleArray(sidebarItems);
+
+        // Kosongkan kontainer sebelum menambahkan yang sudah diacak
+        sidebarPostsListContainer.innerHTML = ''; 
+
+        shuffledSidebarItems.forEach(item => {
+            sidebarPostsListContainer.appendChild(item);
         });
-        console.log("[Masandigital Debug] Semua kartu artikel telah ditambahkan ke DOM.");
-    } else {
-        featuredPostsContainer.innerHTML = '<p>No featured articles to display at the moment.</p>';
-        console.warn("[Masandigital Debug] Tidak ada artikel yang didefinisikan dalam 'allArticles'.");
+        console.log("[Masandigital Debug SIDEBAR] Artikel di sidebar telah diacak dan dimasukkan kembali ke DOM.");
     }
-    console.log("[Masandigital Debug] Script artikel unggulan selesai dijalankan.");
+
+    // Panggil fungsi-fungsi
+    if (featuredPostsContainer) { // Hanya jalankan jika kontainer artikel unggulan ada
+       displayFeaturedArticles();
+    }
+    randomizeSidebarArticles(); // Selalu coba acak sidebar
+
+    console.log("[Masandigital Debug] Script utama selesai dijalankan.");
 });
