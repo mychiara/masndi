@@ -25,7 +25,7 @@ async function fetchAndDisplayPosts() {
     const owner = 'mychiara';
     const repo = 'masndi';
     const postsDir = 'posts';
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${postsDir}`;
+    const apiUrl = `https://masandigital.com/${owner}/${repo}/contents/${postsDir}`;
     
     // Base URLs for GitHub Pages site
     const siteBaseUrl = `https://${owner}.github.io/${repo}/`;
