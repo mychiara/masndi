@@ -11,17 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // --- Content Data ---
-    // Data ini dihasilkan berdasarkan file di:
+    // Data ini dihasilkan berdasarkan file yang terlihat di:
     // Posts: https://github.com/mychiara/masndi/tree/main/posts
-    // Images: https://github.com/mychiara/masndi/tree/main/assets/images
     //
-    // PENTING:
-    // 1. Periksa dan sesuaikan 'title' agar lebih alami dan benar.
-    // 2. Ganti 'date' dengan tanggal publikasi yang sebenarnya untuk setiap artikel.
-    // 3. Perbarui 'altText' agar deskriptif untuk setiap gambar.
-    // 4. Tulis 'excerpt' yang menarik untuk setiap artikel.
-    // 5. Pastikan file HTML artikel ada di folder 'posts/' dan gambar ada di 'assets/images/'
-    //    dengan nama file '{slug}-featured.jpg' dan '{slug}-featured.webp'.
+    // !!! PENTING SEKALI UNTUK ANDA PERIKSA DAN PERBARUI !!!
+    // 1. PASTIKAN SEMUA FILE HTML ARTIKEL (dari daftar slug di bawah) BENAR-BENAR ADA
+    //    di folder 'posts/' lokal Anda dengan nama yang SAMA PERSIS (termasuk huruf besar/kecil).
+    // 2. Periksa dan sesuaikan 'title' agar lebih alami dan benar.
+    // 3. Ganti 'date' dengan tanggal publikasi yang sebenarnya untuk setiap artikel.
+    // 4. Meskipun tidak ditampilkan di homepage, 'imageJpg', 'imageWebp', dan 'altText'
+    //    mungkin masih berguna untuk halaman artikel individual. Isi dengan benar.
+    // 5. Tulis 'excerpt' yang menarik untuk setiap artikel.
 
     const postSlugs = [
         "activity-hotels-for-families-in-the-uk-a-comprehensive-guide",
@@ -45,21 +45,22 @@ document.addEventListener('DOMContentLoaded', function() {
         "organized-trips-for-young-adults-a-comprehensive-guide"
     ];
 
-    const postsData = postSlugs.map(slug => {
+    const postsData = postSlugs.map((slug, index) => {
         const title = generateTitleFromSlug(slug);
         // Anda HARUS mengganti tanggal ini dengan tanggal publikasi yang sebenarnya
-        const placeholderDate = "2024-07-27"; // Ganti dengan tanggal yang relevan
+        // Saya akan membuat tanggal yang berbeda agar pengurutan terlihat
+        const baseDate = new Date(2024, 6, 27); // 27 Juli 2024
+        baseDate.setDate(baseDate.getDate() - index); // Membuat tanggal mundur untuk setiap artikel
+        const placeholderDate = baseDate.toISOString().split('T')[0];
 
         return {
             slug: slug,
-            title: title,
-            date: placeholderDate,
-            imageJpg: `assets/images/${slug}-featured.jpg`,
-            imageWebp: `assets/images/${slug}-featured.webp`,
-            // Anda HARUS mengganti altText ini
-            altText: `${title} - Featured image`,
-            // Anda HARUS mengganti excerpt ini
-            excerpt: `Discover more about ${title}. Our comprehensive guide covers everything you need to know for an unforgettable experience.`
+            title: title, // WAJIB DISESUAIKAN
+            date: placeholderDate, // WAJIB DIGANTI DENGAN TANGGAL ASLI
+            imageJpg: `assets/images/${slug}-featured.jpg`, // Untuk halaman artikel, jika perlu
+            imageWebp: `assets/images/${slug}-featured.webp`, // Untuk halaman artikel, jika perlu
+            altText: `${title} - Featured image`, // WAJIB DISESUAIKAN
+            excerpt: `Discover more about ${title}. Our comprehensive guide covers everything you need to know.`, // WAJIB DISESUAIKAN
         };
     });
 
@@ -73,31 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day}/${month}/${year}`;
     }
 
-    // --- Populate Featured Articles ---
+    // --- Populate Featured Articles (TANPA GAMBAR) ---
     const featuredPostsContainer = document.querySelector('.posts-grid');
-    const numberOfFeaturedPosts = 4; // Display the first X newest posts as featured
+    const numberOfFeaturedPosts = 4;
 
     if (featuredPostsContainer) {
+        // Sort posts by date, newest first.
         const sortedPosts = [...postsData].sort((a, b) => new Date(b.date) - new Date(a.date));
 
         sortedPosts.slice(0, numberOfFeaturedPosts).forEach((post, index) => {
             const articleId = `article-title-featured-${index + 1}`;
             const postUrl = `posts/${post.slug}.html`;
 
-            const imageJpg = post.imageJpg;
-            const imageWebp = post.imageWebp;
-
+            // Elemen gambar dihilangkan dari output untuk featured articles
             const articleCard = `
-                <article class="article-card" aria-labelledby="${articleId}">
-                    <div class="article-image">
-                        <a href="${postUrl}">
-                            <picture>
-                                <source srcset="${imageWebp}" type="image/webp">
-                                <source srcset="${imageJpg}" type="image/jpeg">
-                                <img src="${imageJpg}" alt="${post.altText}" width="360" height="180" loading="lazy">
-                            </picture>
-                        </a>
-                    </div>
+                <article class="article-card article-card-no-image" aria-labelledby="${articleId}">
                     <div class="article-content">
                         <h3 class="article-title" id="${articleId}"><a href="${postUrl}">${post.title}</a></h3>
                         <p class="excerpt">${post.excerpt}</p>
@@ -112,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Populate All Articles in Sidebar ---
     const allPostsSidebarContainer = document.querySelector('.posts-list-sidebar');
     if (allPostsSidebarContainer) {
+        // Sort posts by date for the sidebar as well, newest first.
         const sortedPostsForSidebar = [...postsData].sort((a, b) => new Date(b.date) - new Date(a.date));
 
         sortedPostsForSidebar.forEach(post => {
