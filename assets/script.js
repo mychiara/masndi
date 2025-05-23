@@ -21,27 +21,61 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndDisplayPosts();
 });
 
+async function preliminaryApiTest(owner, repo) {
+    const testApiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+    console.log(`Running preliminary API test to: ${testApiUrl}`);
+    try {
+        const response = await fetch(testApiUrl, {
+            headers: { 'Accept': 'application/vnd.github.v3+json' }
+        });
+        console.log(`Preliminary API Test - Status: ${response.status}, OK: ${response.ok}`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Preliminary API Test - Failed. Response text: ${errorText}`);
+            return false;
+        }
+        const data = await response.json();
+        console.log('Preliminary API Test - Success. Data received:', data.full_name);
+        return true;
+    } catch (error) {
+        console.error('Preliminary API Test - Network or other error:', error);
+        return false;
+    }
+}
+
+
 async function fetchAndDisplayPosts() {
     const owner = 'mychiara';
     const repo = 'masndi';
     const postsDir = 'posts'; // CRITICAL: Ensure this matches your directory name exactly (case-sensitive)
 
+    // Run preliminary test
+    const apiTestSuccessful = await preliminaryApiTest(owner, repo);
+    if (!apiTestSuccessful) {
+        console.error("Preliminary GitHub API test failed. Aborting posts fetch.");
+        const featuredPostsContainer = document.querySelector('.featured-posts .posts-grid');
+        const allPostsSidebarContainer = document.querySelector('.all-posts-sidebar .posts-list-sidebar');
+        if (featuredPostsContainer) featuredPostsContainer.innerHTML = `<p class="error-message">Could not connect to GitHub API.</p>`;
+        if (allPostsSidebarContainer) allPostsSidebarContainer.innerHTML = `<p class="error-message">Could not connect to GitHub API.</p>`;
+        return;
+    }
+    console.log("Preliminary GitHub API test successful. Proceeding to fetch posts.");
+
+
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${postsDir}`;
     
-    // Base URLs for GitHub Pages site
-    const siteBaseUrl = `https://${owner}.github.io/${repo}/`; // e.g., https://mychiara.github.io/masndi/
+    const siteBaseUrl = `https://${owner}.github.io/${repo}/`;
     const postsBaseUrl = `${siteBaseUrl}posts/`;
     const imagesBaseUrl = `${siteBaseUrl}assets/images/`;
 
     const featuredPostsContainer = document.querySelector('.featured-posts .posts-grid');
     const allPostsSidebarContainer = document.querySelector('.all-posts-sidebar .posts-list-sidebar');
 
-    // Log the critical variables and the constructed API URL
-    console.log('GitHub API Fetch Details:');
+    console.log('Fetching Posts - Details:');
     console.log('Owner:', owner);
     console.log('Repo:', repo);
     console.log('Posts Directory:', postsDir);
-    console.log('Constructed API URL:', apiUrl);
+    console.log('Constructed API URL for posts:', apiUrl);
 
     if (featuredPostsContainer) {
         featuredPostsContainer.innerHTML = '<p class="loading-message">Loading articles...</p>';
@@ -53,22 +87,21 @@ async function fetchAndDisplayPosts() {
     try {
         const response = await fetch(apiUrl, {
             headers: {
-                'Accept': 'application/vnd.github.v3+json' // Recommended Accept header
+                'Accept': 'application/vnd.github.v3+json'
             }
         });
 
-        console.log('GitHub API Response Status:', response.status);
-        console.log('GitHub API Response OK:', response.ok);
+        console.log('Fetch Posts - API Response Status:', response.status);
+        console.log('Fetch Posts - API Response OK:', response.ok);
 
         if (!response.ok) {
-            // Log the full response if possible, or at least statusText
-            const errorText = await response.text(); // Try to get more error details
-            console.error('GitHub API Response Text (if error):', errorText);
+            const errorText = await response.text(); 
+            console.error('Fetch Posts - GitHub API Response Text (if error):', errorText);
             throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
         }
         
         const files = await response.json();
-        console.log('Files received from API:', files);
+        console.log('Fetch Posts - Files received from API:', files);
 
         const htmlFiles = files.filter(file => file.name.endsWith('.html') && file.type === 'file');
 
@@ -169,11 +202,10 @@ function createSidebarListItemElement(post) {
     return listItem;
 }
 
-// Basic styling for missing image placeholder (add to your style.css if you want more)
 const style = document.createElement('style');
 style.innerHTML = `
 .missing-image-placeholder {
-    width: 360px;
+    width: 360px; /* Or use aspect-ratio */
     height: 180px;
     background-color: #f0f0f0;
     color: #888;
@@ -183,11 +215,19 @@ style.innerHTML = `
     text-align: center;
     font-size: 14px;
     border: 1px dashed #ccc;
+    box-sizing: border-box;
 }
-.article-image picture { /* Ensure picture tag itself doesn't collapse if img fails */
+.article-image picture {
     display: block; 
-    min-width: 100px; /* Or some other fallback size */
-    min-height: 50px;
+}
+.loading-message, .error-message {
+    padding: 20px;
+    text-align: center;
+    color: #555;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
 }
 `;
 document.head.appendChild(style);
