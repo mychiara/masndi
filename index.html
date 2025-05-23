@@ -6,19 +6,17 @@
     <title>Masandigital.com - AI-Powered Content Hub</title>
     <meta name="description" content="Masandigital.com: Your go-to source for high-quality, AI-generated articles and insightful guides on diverse topics, including in-depth comparisons.">
 
-    <!-- Favicons (from masandigital.com) -->
-    <link rel="icon" href="https://masandigital.com/assets/images/favicon.ico" sizes="any">
-    <link rel="icon" href="https://masandigital.com/assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="https://masandigital.com/assets/images/apple-touch-icon.png">
-    <link rel="manifest" href="https://masandigital.com/site.webmanifest"> <!-- Assuming site.webmanifest is also hosted -->
+    <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://masandigital.com/assets/style.css">
+    <link rel="stylesheet" href="assets/style.css">
 
-    <!-- JSON-LD Structured Data (updated URLs) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -59,19 +57,17 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-area">
-                    <!-- Logo image can be added here if you have one, pointing to masandigital.com -->
-                    <!-- <a href="https://masandigital.com/" class="site-logo-link"><img src="https://masandigital.com/assets/images/logo.png" alt="Masandigital.com Logo"></a> -->
-                    <a href="https://masandigital.com/" class="site-logo-link">
+                    <a href="index.html" class="site-logo-link">
                         <h1 class="site-title">Masandigital.com</h1>
                     </a>
-                    <p class="site-tagline">AI-powered content hub offering informative guides and articles on diverse topics, featuring in-depth comparisons and insights.</p>
+                    <p class="site-tagline">powered content hub offering informative guides and articles on diverse topics, featuring in-depth comparisons and insights</p>
                 </div>
                 <nav class="nav-menu" id="navMenu">
-                    <a href="https://masandigital.com/" class="nav-link active" aria-current="page">Home</a>
-                    <a href="https://masandigital.com/about.html" class="nav-link">About</a>
-                    <a href="https://masandigital.com/contact.html" class="nav-link">Contact</a>
-                    <a href="https://masandigital.com/privacy.html" class="nav-link">Privacy Policy</a>
-                    <a href="https://masandigital.com/disclaimer.html" class="nav-link">Disclaimer</a>
+                    <a href="index.html" class="nav-link active" aria-current="page">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="privacy.html" class="nav-link">Privacy Policy</a>
+                    <a href="disclaimer.html" class="nav-link">Disclaimer</a>
                 </nav>
                 <button class="nav-toggler" id="navToggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
                     <span></span>
@@ -86,16 +82,33 @@
         <main class="main-content-area">
             <section class="featured-posts" aria-labelledby="featured-articles-title">
                 <h2 class="section-title" id="featured-articles-title">Featured Articles</h2>
-                <div class="posts-grid" id="featuredPostsGrid">
-                    <!-- Articles will be dynamically inserted here by script.js -->
-                    <p class="loading-message">Loading featured articles...</p>
+                <div class="posts-grid">
+                    <!-- Featured articles will be dynamically inserted here by script.js -->
+                    <!-- Example of how one card would look (for reference, JS will generate this)
+                    <article class="article-card" aria-labelledby="article-title-1">
+                        <div class="article-image">
+                            <a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">
+                                <picture>
+                                    <source srcset="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.webp" type="image/webp">
+                                    <source srcset="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.jpg" type="image/jpeg">
+                                    <img src="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.jpg" alt="People kayaking in a beautiful canyon" width="360" height="180" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title" id="article-title-1"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h3>
+                            <p class="excerpt">Embark on a journey to the most thrilling adventure destinations across the globe...</p>
+                            <a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html" class="read-more">Read More <span class="visually-hidden">about Best Adventure Places in the World</span>→</a>
+                        </div>
+                    </article>
+                     -->
                 </div>
             </section>
         </main>
 
         <aside class="sidebar-area" aria-labelledby="sidebar-title-main">
             <section class="author-profile-sidebar" aria-labelledby="author-name-sidebar">
-                <img src="https://masandigital.com/assets/images/author-photo.jpeg" alt="Author MasanDigital" class="author-image-sidebar" width="100" height="100" loading="lazy">
+                <img src="assets/images/author-photo.jpeg" alt="Author MasanDigital" class="author-image-sidebar" width="100" height="100" loading="lazy">
                 <h3 class="author-name-sidebar" id="author-name-sidebar">MasanDigital</h3>
                 <p class="author-bio-sidebar">
                     Welcome to Masandigital.com! I'm passionate about exploring the frontiers of AI and sharing high-quality, insightful articles on a variety of topics. My goal is to make complex subjects accessible and engaging.
@@ -104,9 +117,14 @@
 
             <section class="all-posts-sidebar" aria-labelledby="all-articles-sidebar-title">
                 <h2 class="sidebar-title" id="all-articles-sidebar-title">All Articles</h2>
-                <div class="posts-list-sidebar" id="allPostsListSidebar">
-                    <!-- Post list items will be dynamically inserted here by script.js -->
-                    <p class="loading-message">Loading article list...</p>
+                <div class="posts-list-sidebar">
+                    <!-- All article links will be dynamically inserted here by script.js -->
+                    <!-- Example of how one list item would look (for reference, JS will generate this)
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    -->
                 </div>
             </section>
         </aside>
@@ -116,17 +134,16 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-nav" aria-label="Footer navigation">
-                    <a href="https://masandigital.com/">Home</a>
-                    <a href="https://masandigital.com/about.html">About</a>
-                    <a href="https://masandigital.com/contact.html">Contact</a>
-                    <a href="https://masandigital.com/privacy.html">Privacy Policy</a>
-                    <a href="https://masandigital.com/disclaimer.html">Disclaimer</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
                 </div>
                 <p class="copyright">© <span id="currentYear"></span> Masandigital.com. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://masandigital.com/assets/script.js" defer></script>
+    <script src="assets/script.js" defer></script>
 </body>
 </html>
