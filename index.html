@@ -60,8 +60,25 @@
                     <a href="index.html" class="site-logo-link">
                         <h1 class="site-title">Masandigital.com</h1>
                     </a>
-                    <p class="site-tagline">powered content hub offering informative guides and articles on diverse topics, featuring in-depth comparisons and insights</p>
+                    <p class="site-tagline">AI-powered content hub offering informative guides and articles on diverse topics, featuring in-depth comparisons and insights</p>
                 </div>
+
+                <div class="header-right-column">
+                    <div class="search-container">
+                        <input type="search" id="headerSearchInput" placeholder="Search articles..." aria-label="Search articles">
+                        <button id="headerSearchButton" aria-label="Search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="nav-toggler" id="navToggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                
                 <nav class="nav-menu" id="navMenu">
                     <a href="index.html" class="nav-link active" aria-current="page">Home</a>
                     <a href="about.html" class="nav-link">About</a>
@@ -69,11 +86,6 @@
                     <a href="privacy.html" class="nav-link">Privacy Policy</a>
                     <a href="disclaimer.html" class="nav-link">Disclaimer</a>
                 </nav>
-                <button class="nav-toggler" id="navToggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
         </div>
     </header>
@@ -83,14 +95,77 @@
             <section class="featured-posts" aria-labelledby="featured-articles-title">
                 <h2 class="section-title" id="featured-articles-title">Featured Articles</h2>
                 <div class="posts-grid">
-                    <!-- Featured articles will be dynamically inserted here by script.js -->
+                    <article class="article-card" aria-labelledby="article-title-1">
+                        <div class="article-image">
+                            <a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">
+                                <picture>
+                                    <source srcset="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.webp" type="image/webp">
+                                    <source srcset="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.jpg" type="image/jpeg">
+                                    <img src="assets/images/best-adventure-places-in-the-world-a-connoisseurs-guide-featured.jpg" alt="People kayaking in a beautiful canyon" width="360" height="200" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title" id="article-title-1"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h3>
+                            <p class="excerpt">Embark on a journey to the most thrilling adventure destinations across the globe...</p>
+                            <a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Adventure Places in the World</span></a>
+                        </div>
+                    </article>
+                    <article class="article-card" aria-labelledby="article-title-2">
+                        <div class="article-image">
+                            <a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html">
+                                <picture>
+                                    <source srcset="assets/images/hotels-with-activities-for-families-a-comprehensive-guide-featured.webp" type="image/webp">
+                                    <source srcset="assets/images/hotels-with-activities-for-families-a-comprehensive-guide-featured.jpg" type="image/jpeg">
+                                    <img src="assets/images/hotels-with-activities-for-families-a-comprehensive-guide-featured.jpg" alt="Family enjoying activities at a resort pool" width="360" height="200" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title" id="article-title-2"><a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html">Hotels with Activities for Families: A Comprehensive Guide</a></h3>
+                            <p class="excerpt">Discover hotels that offer more than just a stay. Our guide helps you find family-friendly resorts...</p>
+                            <a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Hotels with Activities for Families</span></a>
+                        </div>
+                    </article>
+                    <article class="article-card" aria-labelledby="article-title-3">
+                        <div class="article-image">
+                            <a href="posts/best-family-holiday-company-a-comprehensive-guide.html">
+                                <picture>
+                                    <source srcset="assets/images/best-family-holiday-company-a-comprehensive-guide-featured.webp" type="image/webp">
+                                    <source srcset="assets/images/best-family-holiday-company-a-comprehensive-guide-featured.jpg" type="image/jpeg">
+                                    <img src="assets/images/best-family-holiday-company-a-comprehensive-guide-featured.jpg" alt="Happy family on vacation with luggage" width="360" height="200" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title" id="article-title-3"><a href="posts/best-family-holiday-company-a-comprehensive-guide.html">Best Family Holiday Company: A Comprehensive Guide</a></h3>
+                            <p class="excerpt">Planning a family vacation? Choosing the right holiday company can make all the difference...</p>
+                            <a href="posts/best-family-holiday-company-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Family Holiday Company</span></a>
+                        </div>
+                    </article>
+                     <article class="article-card" aria-labelledby="article-title-4">
+                        <div class="article-image">
+                            <a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html">
+                                <picture>
+                                    <source srcset="assets/images/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler-featured.webp" type="image/webp">
+                                    <source srcset="assets/images/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler-featured.jpg" type="image/jpeg">
+                                    <img src="assets/images/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler-featured.jpg" alt="Hiking in the European Alps" width="360" height="200" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="article-content">
+                            <h3 class="article-title" id="article-title-4"><a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html">Best Adventure Trips in Europe: A Comprehensive Guide for the Discerning Traveler</a></h3>
+                            <p class="excerpt">Europe offers a diverse range of adventure trips, from hiking majestic mountains to exploring historic coastlines...</p>
+                            <a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Adventure Trips in Europe</span></a>
+                        </div>
+                    </article>
                 </div>
             </section>
         </main>
 
         <aside class="sidebar-area" aria-labelledby="sidebar-title-main">
             <section class="author-profile-sidebar" aria-labelledby="author-name-sidebar">
-                <img src="assets/images/author-photo.jpeg" alt="Author MasanDigital" class="author-image-sidebar" width="100" height="100" loading="lazy">
+                <img src="assets/images/author-photo.jpeg" alt="Author MasanDigital" class="author-image-sidebar" width="120" height="120" loading="lazy">
                 <h3 class="author-name-sidebar" id="author-name-sidebar">MasanDigital</h3>
                 <p class="author-bio-sidebar">
                     Welcome to Masandigital.com! I'm passionate about exploring the frontiers of AI and sharing high-quality, insightful articles on a variety of topics. My goal is to make complex subjects accessible and engaging.
@@ -100,8 +175,110 @@
             <section class="all-posts-sidebar" aria-labelledby="all-articles-sidebar-title">
                 <h2 class="sidebar-title" id="all-articles-sidebar-title">All Articles</h2>
                 <div class="posts-list-sidebar">
-                    <!-- All article links will be dynamically inserted here by script.js -->
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html">Hotels with Activities for Families: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/best-family-holiday-company-a-comprehensive-guide.html">Best Family Holiday Company: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html">Best Adventure Trips in Europe: A Comprehensive Guide for the Discerning Traveler</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/cheap-adventure-holidays-europe-a-comprehensive-guide.html">Cheap Adventure Holidays Europe: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/great-family-holidays-abroad-a-comprehensive-guide.html">Great Family Holidays Abroad: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/kids-activity-holidays-uk-a-comprehensive-guide.html">Kids Activity Holidays UK: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/organized-trips-for-young-adults-a-comprehensive-guide.html">Organized Trips for Young Adults: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/east-coast-adventure-vacations-a-comprehensive-guide.html">East Coast Adventure Vacations: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                    <div class="post-list-item-sidebar">
+                        <h3 class="post-list-title-sidebar"><a href="posts/family-activity-weekend-breaks-a-comprehensive-guide.html">Family Activity Weekend Breaks: A Comprehensive Guide</a></h3>
+                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
+                    </div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/family-adventure-breaks-uk-a-comprehensive-guide.html">Family Adventure Breaks UK: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/family-sports-holidays-europe-a-comprehensive-guide.html">Family Sports Holidays Europe: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/activity-hotels-for-families-in-the-uk-a-comprehensive-guide.html">Activity Hotels for Families in the UK: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/adventure-getaway-destinations-a-comprehensive-guide.html">Adventure Getaway Destinations: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/cheap-activity-holidays-uk-a-comprehensive-guide.html">Cheap Activity Holidays UK: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/east-coast-adventure-trips-a-comprehensive-guide.html">East Coast Adventure Trips: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/exploring-holidays-for-couples-a-comprehensive-guide.html">Exploring Holidays for Couples: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/family-activity-holidays-england-a-comprehensive-guide.html">Family Activity Holidays England: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
+                     <div class="post-list-item-sidebar"><h3 class="post-list-title-sidebar"><a href="posts/family-activity-weekend-breaks-uk-a-comprehensive-guide.html">Family Activity Weekend Breaks UK: A Comprehensive Guide</a></h3><div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div></div>
                 </div>
+            </section>
+
+            <section class="external-links-sidebar" aria-labelledby="external-links-title">
+                <h2 class="sidebar-title" id="external-links-title">My Other Projects</h2>
+                <ul class="external-links-list">
+                    <li>
+                        <a href="https://watermarks.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Tools Watermark
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://demo-ukom.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            App Uji Kompetensi
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://keyword-trend.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Keyword Trending Generator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://tb-screening.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            App TB Screening
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ptm-screening.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            App PTM Screening
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://kti-generator.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            KTI Generator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://andy-promptgenerator.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Prompt Generator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://freegmail.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Free Gmail Generator
+                        </a>
+                    </li>
+                </ul>
             </section>
         </aside>
     </div>
@@ -114,6 +291,7 @@
                     <a href="about.html">About</a>
                     <a href="contact.html">Contact</a>
                     <a href="privacy.html">Privacy Policy</a>
+                    <a href="disclaimer.html">Disclaimer</a>
                 </div>
                 <p class="copyright">© <span id="currentYear"></span> Masandigital.com. All rights reserved.</p>
             </div>
