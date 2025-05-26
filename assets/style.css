@@ -98,13 +98,13 @@ ul, ol {
     padding-right: var(--spacing-unit);
 }
 
-.page-content {
+.page-content { /* For pages WITHOUT sidebar */
     flex-grow: 1;
     padding-top: calc(var(--spacing-unit) * 2);
     padding-bottom: calc(var(--spacing-unit) * 2);
 }
 
-.page-wrapper {
+.page-wrapper { /* For pages WITH sidebar */
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr); /* Ensure sidebar has min width */
     gap: calc(var(--spacing-unit) * 2);
@@ -185,7 +185,7 @@ ul, ol {
     font-size: 0.9rem;
     color: var(--text-color);
     width: 180px;
-    padding: 0.2rem 0; /* Added padding for better text alignment */
+    padding: 0.2rem 0; 
     transition: width 0.3s ease;
 }
 #headerSearchInput::placeholder {
@@ -213,7 +213,7 @@ ul, ol {
     height: 1em;
 }
 
-.nav-menu { /* This is the navigation link container */
+.nav-menu { /* Navigation link container */
     display: flex; /* Default for desktop */
     align-items: center;
     gap: calc(var(--spacing-unit) * 0.25);
@@ -272,18 +272,28 @@ ul, ol {
 
 
 /* --- Main Content & Page Sections --- */
-.section-title {
+.section-title { /* General section title style */
     margin-bottom: calc(var(--spacing-unit) * 1.5);
     padding-bottom: calc(var(--spacing-unit) * 0.5);
-    border-bottom: 3px solid var(--primary-color);
-    display: inline-block;
     font-size: 1.85rem;
+    color: var(--dark-color);
+    position: relative;
 }
+
+/* Section title specifically in main content area (e.g., "My Other Projects", "Featured Articles") */
+.main-content-area > section > .section-title {
+    border-bottom: 3px solid var(--primary-color);
+    display: inline-block; /* To make border only as wide as text */
+}
+.main-content-area > section > .section-title::after { /* Hide the accent line for these titles */
+    display: none;
+}
+
 .other-projects-showcase {
     margin-bottom: calc(var(--spacing-unit) * 3); /* Space below projects section */
 }
 
-.page-header-section {
+.page-header-section { /* For static pages like About, Contact */
     text-align: center;
     margin-bottom: calc(var(--spacing-unit) * 2);
 }
@@ -291,32 +301,36 @@ ul, ol {
     font-size: 2.8rem;
     color: var(--dark-color);
 }
-.content-section {
+.content-section { /* Wrapper for main content on static pages */
     background-color: var(--card-bg);
     padding: calc(var(--spacing-unit) * 2);
     border-radius: var(--border-radius-md);
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
 }
-.content-section h2 {
+.content-section h2 { /* Headings within static page content */
     margin-top: calc(var(--spacing-unit) * 1.5);
     margin-bottom: calc(var(--spacing-unit) * 0.75);
     color: var(--primary-color);
 }
 
-/* --- Other Projects Showcase (Moved to Main Content) --- */
+/* --- Other Projects Showcase --- */
 .projects-showcase-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); 
     gap: calc(var(--spacing-unit) * 1.5);
-    margin-top: calc(var(--spacing-unit) * 0.5); /* Space below section title */
+    margin-top: calc(var(--spacing-unit) * 0.5); 
+}
+
+.project-showcase-item { 
+    display: flex; 
 }
 
 .project-showcase-item .project-showcase-link {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
     text-align: center;
     background-color: var(--card-bg);
     padding: calc(var(--spacing-unit) * 1.5);
@@ -326,7 +340,8 @@ ul, ol {
     color: var(--text-color);
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    height: 100%; /* Ensure items in a row have same height */
+    width: 100%; 
+    height: 100%; 
 }
 
 .project-showcase-item .project-showcase-link:hover {
@@ -340,24 +355,25 @@ ul, ol {
 }
 
 .project-icon {
-    width: 40px;
-    height: 40px;
-    stroke: var(--accent-color); /* Default icon color */
+    width: 36px; 
+    height: 36px; 
+    stroke: var(--accent-color); 
     margin-bottom: calc(var(--spacing-unit) * 0.75);
     transition: stroke 0.2s ease;
+    flex-shrink: 0; 
 }
 
 .project-showcase-link span {
     font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 0.9rem; 
+    line-height: 1.3; 
 }
 
 
 /* --- Featured Posts Grid --- */
-.featured-posts .section-title {
+.featured-posts .section-title { /* This will use the .main-content-area > section > .section-title style */
     margin-bottom: calc(var(--spacing-unit) * 2);
-    padding-bottom: calc(var(--spacing-unit) * 0.75);
+    padding-bottom: calc(var(--spacing-unit) * 0.75); /* Override general section-title padding if needed */
 }
 
 .posts-grid {
@@ -384,11 +400,11 @@ ul, ol {
 .article-card .article-image {
     overflow: hidden;
     position: relative;
-    aspect-ratio: 16/10; /* Modern aspect ratio for card images */
+    aspect-ratio: 16/10; 
 }
 .article-card .article-image img {
     width: 100%;
-    height: 100%; /* Fill aspect ratio container */
+    height: 100%; 
     object-fit: cover;
     transition: transform 0.4s ease;
 }
@@ -427,7 +443,7 @@ ul, ol {
 .article-card .read-more {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem; /* Space between text and arrow */
+    gap: 0.4rem; 
     background-color: var(--primary-color);
     color: white;
     padding: 0.6rem 1.2rem;
@@ -445,9 +461,9 @@ ul, ol {
     text-decoration: none;
     transform: translateY(-2px);
 }
-.article-card .read-more span:not(.visually-hidden) { /* Arrow styling */
+.article-card .read-more span:not(.visually-hidden) { 
     transition: transform 0.2s ease-in-out;
-    font-size: 1.1em; /* Slightly larger arrow */
+    font-size: 1.1em; 
 }
 .article-card .read-more:hover span:not(.visually-hidden) {
     transform: translateX(4px);
@@ -478,7 +494,7 @@ ul, ol {
     object-fit: cover;
     margin: 0 auto var(--spacing-unit);
     border: 4px solid var(--primary-color);
-    padding: 4px; /* Creates a double border effect */
+    padding: 4px; 
     background-color: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
@@ -499,46 +515,45 @@ ul, ol {
     margin-bottom: 0;
 }
 
-.sidebar-title { /* This style is now also used by ".other-projects-showcase .section-title" */
-    font-size: 1.5rem;
+/* Section title specifically in the sidebar */
+.sidebar-area .section-title,
+.sidebar-area .sidebar-title { /* Keep .sidebar-title for backward compatibility or specific use */
+    font-size: 1.5rem; /* Use general section title font-size */
     color: var(--dark-color);
     margin-bottom: calc(var(--spacing-unit) * 1.5);
     padding-bottom: calc(var(--spacing-unit) * 0.6);
     position: relative;
-    display: block; /* Changed from inline-block for .section-title usage */
+    display: block; /* Block for full width accent line */
+    border-bottom: none; /* Remove the primary color border if .section-title is used */
 }
-.sidebar-title::after {
+.sidebar-area .section-title::after,
+.sidebar-area .sidebar-title::after {
     content: '';
     position: absolute;
     left: 0;
     bottom: 0;
     width: 60px;
     height: 3px;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* Accent line for sidebar titles */
     border-radius: 2px;
-}
-/* If .section-title (in main content) needs different bottom border */
-.main-content-area > section > .section-title {
-    display: inline-block; /* Restore for main section titles if needed */
-    border-bottom: 3px solid var(--primary-color);
-}
-.main-content-area > section > .section-title::after {
-    display: none; /* Hide the accent color line for main section titles */
+    display: block; /* Ensure it's visible */
 }
 
-
-.all-posts-sidebar .sidebar-title { /* Specific styling for sidebar "All Articles" title */
-     /* Inherits general .sidebar-title, can add overrides if needed */
+.all-posts-sidebar .sidebar-title { 
+     /* Inherits general .sidebar-area .sidebar-title */
 }
 
-
+.posts-list-sidebar {
+    padding-left: 0; /* Ensure ul reset is applied */
+    list-style: none; /* Ensure ul reset is applied */
+}
 .post-list-item-sidebar {
-    margin-bottom: calc(var(--spacing-unit) * 0.5); /* Tighter spacing */
+    margin-bottom: calc(var(--spacing-unit) * 0.5); 
     border-bottom: 1px solid var(--lighter-gray);
     transition: background-color 0.2s ease, border-left-color 0.2s ease;
     border-radius: var(--border-radius-sm);
     padding: calc(var(--spacing-unit) * 0.75);
-    border-left: 4px solid transparent; /* Initial transparent border for hover effect */
+    border-left: 4px solid transparent; 
 }
 .post-list-item-sidebar:hover {
     background-color: var(--lighter-gray);
@@ -572,13 +587,10 @@ ul, ol {
     gap: 0.4rem;
 }
 .post-meta-sidebar::before {
-    content: '📅'; /* Calendar emoji */
+    content: '📅'; 
     font-size: 0.9em;
     opacity: 0.8;
 }
-
-/* Removed .external-links-sidebar and its children as they are now .other-projects-showcase */
-
 
 /* --- Footer --- */
 .site-footer {
@@ -642,40 +654,35 @@ ul, ol {
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
     .page-main-title { font-size: 2.4rem; }
-    .section-title { font-size: 1.6rem; } /* Affects both sidebar and main section titles */
+    .section-title { font-size: 1.6rem; } 
     .author-name-sidebar { font-size: 1.1rem; }
 
     .page-wrapper {
-        grid-template-columns: 1fr; /* Sidebar stacks below main content */
+        grid-template-columns: 1fr; 
         gap: calc(var(--spacing-unit) * 2);
     }
     .sidebar-area {
         margin-top: calc(var(--spacing-unit) * 2);
     }
     
-    .posts-grid {
-        /* auto-fit will handle this, but can force 2 columns if preferred */
-        /* grid-template-columns: repeat(2, 1fr); */
-    }
     .projects-showcase-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(2, 1fr); 
     }
-
 
     .logo-area .site-tagline {
         max-width: 100%;
     }
 
-    .nav-menu { /* Desktop nav menu items, not the mobile dropdown */
-        display: none; /* Hide desktop inline nav links, nav-toggler will be used */
+    .nav-menu { 
+        display: none; 
     }
-     .nav-menu.active { /* This refers to the mobile dropdown */
-        display: flex; /* Show when toggled */
+     .nav-menu.active { 
+        display: flex; 
         flex-direction: column;
         width: 100%;
         background-color: var(--card-bg);
         position: absolute;
-        top: 100%; /* Position below the header block */
+        top: 100%; 
         left: 0;
         right: 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -706,7 +713,7 @@ ul, ol {
     }
 
     .nav-toggler {
-        display: block; /* Show toggler */
+        display: block; 
     }
     #headerSearchInput {
         width: 150px;
@@ -719,20 +726,15 @@ ul, ol {
         max-width: 720px;
     }
 
-    .header-content {
-        /* flex-wrap: wrap; */ /* Already set */
-        /* position: relative; */ /* Already set */
-    }
     .logo-area {
         margin-bottom: calc(var(--spacing-unit) * 0.75);
-        /* flex-grow: 1; */ /* Already set */
     }
      .logo-area .site-tagline {
-        font-size: 0.75rem; /* Slightly smaller tagline on mobile */
+        font-size: 0.75rem; 
     }
     .header-right-column {
         gap: calc(var(--spacing-unit) * 0.75);
-        margin-left: auto; /* Push to right if logo-area is not full width */
+        margin-left: auto; 
     }
     .search-container {
         padding: 0.2rem 0.2rem 0.2rem 0.6rem;
@@ -749,12 +751,11 @@ ul, ol {
         width: 0.9em; height: 0.9em;
     }
 
-    /* Content Adjustments for Small Screens */
-    .article-card .article-title { font-size: 1.2rem; } /* Adjusted for smaller cards */
+    .article-card .article-title { font-size: 1.2rem; } 
     .article-card .excerpt { font-size: 0.875rem; }
 
     .projects-showcase-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(2, 1fr); 
         gap: var(--spacing-unit);
     }
     .project-showcase-item .project-showcase-link {
@@ -766,14 +767,13 @@ ul, ol {
         margin-bottom: calc(var(--spacing-unit) * 0.5);
     }
     .project-showcase-link span {
-        font-size: 0.9rem;
+        font-size: 0.85rem; 
     }
-
 
     h1 { font-size: 2rem; }
     h2 { font-size: 1.6rem; }
     .page-main-title { font-size: 2rem; }
-    .section-title { font-size: 1.5rem; } /* Affects all */
+    .section-title { font-size: 1.5rem; } 
     .author-name-sidebar { font-size: 1rem; }
 }
 
@@ -781,7 +781,7 @@ ul, ol {
 @media (max-width: 575.98px) {
     .logo-area {
         text-align: center;
-        flex-basis: 100%; /* Logo area takes full width first */
+        flex-basis: 100%; 
         margin-bottom: var(--spacing-unit);
     }
     .logo-area .site-title {
@@ -794,22 +794,25 @@ ul, ol {
     }
 
     .header-right-column {
-        flex-basis: 100%; /* Right column takes full width below logo */
-        justify-content: space-between; /* Space out search and toggler */
+        flex-basis: 100%; 
+        justify-content: space-between; 
     }
     .search-container {
-        flex-grow: 1; /* Allow search to take available space */
+        flex-grow: 1; 
         max-width: none;
     }
     #headerSearchInput {
-        width: 100%; /* Input takes full width within search container */
+        width: 100%; 
     }
 
     .article-card .article-title {
         font-size: 1.15rem;
     }
-    .projects-showcase-grid { /* Single column for very small screens */
-        grid-template-columns: 1fr;
+    .projects-showcase-grid { 
+        grid-template-columns: 1fr; 
+    }
+    .project-showcase-link span {
+        font-size: 0.9rem; 
     }
     .author-image-sidebar {
         width: 100px;
