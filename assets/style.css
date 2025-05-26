@@ -565,7 +565,7 @@ ul, ol {
 }
 
 .post-list-title-sidebar {
-    font-size: 0.95rem;
+    font-size: 12px; /* MODIFIED: Changed from 0.95rem */
     font-weight: 600;
     margin-bottom: calc(var(--spacing-unit) * 0.25);
     line-height: 1.4;
@@ -580,7 +580,7 @@ ul, ol {
 }
 
 .post-meta-sidebar {
-    font-size: 0.8rem;
+    font-size: 11px; /* MODIFIED: Changed from 0.8rem */
     color: var(--text-muted);
     display: flex;
     align-items: center;
@@ -588,7 +588,7 @@ ul, ol {
 }
 .post-meta-sidebar::before {
     content: '📅'; 
-    font-size: 0.9em;
+    font-size: 0.9em; /* Relative to its new font-size */
     opacity: 0.8;
 }
 
