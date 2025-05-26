@@ -832,3 +832,113 @@ ul, ol {
     white-space: nowrap !important;
     border: 0 !important;
 }
+/* ... (kode CSS sebelumnya tetap sama) ... */
+
+/* --- Social Media Follow Section --- */
+.social-media-follow {
+    margin-top: calc(var(--spacing-unit) * 2.5); /* Space above social media section */
+    margin-bottom: calc(var(--spacing-unit) * 2.5); /* Space below social media section */
+    padding: calc(var(--spacing-unit) * 2);
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.social-media-follow .section-title { /* Styling for "Follow Me" title */
+    text-align: center;
+    display: block; /* To allow text-align center and full width for border */
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    /* border-bottom: 3px solid var(--primary-color); /* Already applied by .main-content-area > section > .section-title */
+}
+/* If you want a different underline style for this specific title: */
+/*
+.social-media-follow .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: calc(var(--spacing-unit) * 0.5) auto 0;
+    border-radius: 2px;
+}
+*/
+
+
+.social-media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+.social-media-item {
+    display: flex; /* To make the anchor fill the height if needed */
+}
+
+.social-media-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing-unit) * 1.25);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    color: #fff; /* Default text color for social links */
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    width: 100%;
+    height: 100%;
+    min-height: 100px; /* Ensure a minimum tap area / visual presence */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.social-media-link:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    stroke: #fff; /* Default icon stroke color */
+}
+
+/* Specific Social Media Colors */
+.social-media-link.facebook { background-color: #1877F2; }
+.social-media-link.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.social-media-link.instagram .social-icon,
+.social-media-link.instagram span {
+    /* For better contrast on gradient */
+    text-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.social-media-link.tiktok { background-color: #000000; } /* Simple black, or #010101 / #FE2C55 for more official */
+.social-media-link.tiktok .social-icon { stroke: #FE2C55; } /* Red accent for TikTok icon */
+.social-media-link.tiktok span { color: #fff; }
+
+
+/* --- Responsive Design Adjustments for Social Media --- */
+@media (max-width: 767.98px) {
+    .social-media-grid {
+        grid-template-columns: 1fr; /* Stack social media links on small screens */
+        gap: var(--spacing-unit);
+    }
+    .social-media-link {
+        flex-direction: row; /* Icon and text side-by-side */
+        justify-content: flex-start; /* Align to left */
+        min-height: auto;
+        padding: calc(var(--spacing-unit) * 0.75) var(--spacing-unit);
+    }
+    .social-icon {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 0;
+        margin-right: calc(var(--spacing-unit) * 0.75);
+    }
+    .social-media-follow .section-title {
+        margin-bottom: calc(var(--spacing-unit) * 1.5);
+    }
+}
+
+/* ... (sisa kode CSS responsif dan lainnya tetap sama) ... */
