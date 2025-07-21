@@ -80,7 +80,7 @@ logoutButton.addEventListener('click', () => {
 // --- LICENSE MANAGEMENT (DIPERBARUI) ---
 function listenToLicenses() {
     loadingIndicator.style.display = 'block';
-    const q = collection(db, "licenses");
+    const q = collection(db, "tools");
     licensesUnsubscribe = onSnapshot(q, (querySnapshot) => {
         // Reset tabel dan hitungan
         licensesTbody.innerHTML = '';
@@ -176,12 +176,12 @@ licensesTbody.addEventListener('click', async (e) => {
     if (!id) return;
 
     if (target.classList.contains('toggle-active-btn')) {
-        const docRef = doc(db, "licenses", id);
+        const docRef = doc(db, "tools", id);
         const currentActiveState = target.textContent.includes('Nonaktifkan');
         await updateDoc(docRef, { active: !currentActiveState });
     } else if (target.classList.contains('reset-session-btn')) {
         if (confirm(`Anda yakin ingin mereset sesi untuk lisensi ${id}?`)) {
-            const docRef = doc(db, "licenses", id);
+            const docRef = doc(db, "tools", id);
             await updateDoc(docRef, { activeSessionId: null });
         }
     } else if (target.classList.contains('view-history-btn')) {
@@ -197,7 +197,7 @@ addLicenseButton.addEventListener('click', async () => {
         return;
     }
     try {
-        await setDoc(doc(db, "licenses", newKey), {
+        await setDoc(doc(db, "tools", newKey), {
             active: true,
             activeSessionId: null,
             lastSeenAt: null,
