@@ -1,3 +1,5 @@
+// admin.js
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 import { getFirestore, collection, onSnapshot, doc, updateDoc, setDoc, query, where, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
@@ -34,7 +36,7 @@ const historyTbody = document.getElementById('history-tbody');
 const historyLoadingIndicator = document.getElementById('history-loading-indicator');
 const historyViewTitle = document.getElementById('history-view-title');
 
-// DOM Elements untuk Ringkasan (BARU)
+// DOM Elements untuk Ringkasan
 const totalCountEl = document.getElementById('total-count');
 const onlineCountEl = document.getElementById('online-count');
 const idleCountEl = document.getElementById('idle-count');
@@ -80,7 +82,8 @@ logoutButton.addEventListener('click', () => {
 // --- LICENSE MANAGEMENT (DIPERBARUI) ---
 function listenToLicenses() {
     loadingIndicator.style.display = 'block';
-    const q = collection(db, "tools");
+    // --- PERUBAHAN 1: Mengganti nama koleksi dari "licenses" menjadi "tools" ---
+    const q = collection(db, "tools"); 
     licensesUnsubscribe = onSnapshot(q, (querySnapshot) => {
         // Reset tabel dan hitungan
         licensesTbody.innerHTML = '';
@@ -124,7 +127,8 @@ function listenToLicenses() {
 
         loadingIndicator.style.display = 'none';
     }, (error) => {
-        console.error("Error listening to licenses: ", error);
+        // Log error juga disesuaikan untuk kejelasan
+        console.error("Error listening to tools collection: ", error);
         loadingIndicator.textContent = "Gagal memuat data.";
     });
 }
@@ -176,11 +180,13 @@ licensesTbody.addEventListener('click', async (e) => {
     if (!id) return;
 
     if (target.classList.contains('toggle-active-btn')) {
+        // --- PERUBAHAN 2: Mengganti nama koleksi dari "licenses" menjadi "tools" ---
         const docRef = doc(db, "tools", id);
         const currentActiveState = target.textContent.includes('Nonaktifkan');
         await updateDoc(docRef, { active: !currentActiveState });
     } else if (target.classList.contains('reset-session-btn')) {
         if (confirm(`Anda yakin ingin mereset sesi untuk lisensi ${id}?`)) {
+            // --- PERUBAHAN 2 (lanjutan): Mengganti nama koleksi dari "licenses" menjadi "tools" ---
             const docRef = doc(db, "tools", id);
             await updateDoc(docRef, { activeSessionId: null });
         }
@@ -197,6 +203,7 @@ addLicenseButton.addEventListener('click', async () => {
         return;
     }
     try {
+        // --- PERUBAHAN 3: Mengganti nama koleksi dari "licenses" menjadi "tools" ---
         await setDoc(doc(db, "tools", newKey), {
             active: true,
             activeSessionId: null,
@@ -214,7 +221,7 @@ addLicenseButton.addEventListener('click', async () => {
     addLicenseMessage.classList.remove('hidden');
 });
 
-// --- USER HISTORY (BARU) ---
+// --- USER HISTORY (Tidak perlu diubah) ---
 async function viewUserHistory(licenseId, username) {
     dashboardView.classList.add('hidden');
     historyView.classList.remove('hidden');
@@ -223,6 +230,7 @@ async function viewUserHistory(licenseId, username) {
     historyLoadingIndicator.style.display = 'block';
 
     try {
+        // Bagian ini sudah benar karena mengambil data dari "quiz_history" berdasarkan licenseKey
         const historyRef = collection(db, "quiz_history");
         const q = query(historyRef, where("licenseKey", "==", licenseId), orderBy("date", "desc"));
         const querySnapshot = await getDocs(q);
