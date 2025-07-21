@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Bimbel UKOM</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5; --text-color: #333; --card-bg: #ffffff;
+            --border-color: #e0e0e0; --primary-color: #007BFF; --primary-hover: #0056b3;
+            --danger-color: #dc3545; --danger-hover: #b02a37; --warning-color: #ffc107;
+            --warning-hover: #e0a800; --success-color: #28a745; --success-hover: #1e7e34;
+            --info-color: #17a2b8; --info-hover: #117a8b;
+            --status-online: #28a745; --status-idle: #ffc107; --status-offline: #6c757d; --status-disabled: #dc3545;
+        }
+        body { font-family: Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        .hidden { display: none !important; }
+        .card { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 25px; margin-bottom: 20px; }
+        h1, h2 { color: var(--primary-color); }
+        input[type="email"], input[type="password"], input[type="text"] { width: calc(100% - 24px); padding: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1em; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; color: white; cursor: pointer; font-size: 1em; transition: background-color 0.2s; }
+        .btn-primary { background-color: var(--primary-color); } .btn-primary:hover { background-color: var(--primary-hover); }
+        .btn-danger { background-color: var(--danger-color); } .btn-danger:hover { background-color: var(--danger-hover); }
+        .btn-warning { background-color: var(--warning-color); color: #212529;} .btn-warning:hover { background-color: var(--warning-hover); }
+        .btn-success { background-color: var(--success-color); } .btn-success:hover { background-color: var(--success-hover); }
+        .btn-info { background-color: var(--info-color); } .btn-info:hover { background-color: var(--info-hover); }
+        #logout-button { float: right; }
+        .message { padding: 10px; margin-top: 10px; border-radius: 5px; text-align: center; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid var(--border-color); text-align: left; vertical-align: middle; }
+        th { background-color: var(--bg-color); }
+        .action-buttons button { margin-right: 5px; margin-bottom: 5px; }
+        .status-badge { padding: 5px 10px; border-radius: 12px; color: white; font-weight: bold; font-size: 0.85em; text-align: center; }
+        .status-online { background-color: var(--status-online); } .status-idle { background-color: var(--status-idle); color: #212529;}
+        .status-offline { background-color: var(--status-offline); } .status-disabled { background-color: var(--status-disabled); }
+        .add-license-form { display: flex; gap: 10px; align-items: center; }
+        .add-license-form input { flex-grow: 1; margin-bottom: 0; }
+        /* --- Gaya Kartu Ringkasan (BARU) --- */
+        .summary-container { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .summary-card { flex: 1; background-color: var(--card-bg); border-radius: 8px; padding: 20px; text-align: center; border-left: 5px solid var(--primary-color); box-shadow: 0 1px 4px rgba(0,0,0,0.07); min-width: 150px; }
+        .summary-card h4 { margin: 0 0 10px 0; font-size: 0.95em; color: #6c757d; font-weight: 600; text-transform: uppercase; }
+        .summary-value { font-size: 2.2em; font-weight: bold; color: var(--primary-color); }
+        .summary-card.status-online-card { border-left-color: var(--status-online); }
+        .summary-card.status-online-card .summary-value { color: var(--status-online); }
+        .summary-card.status-idle-card { border-left-color: var(--status-idle); }
+        .summary-card.status-idle-card .summary-value { color: var(--status-idle); }
+        .summary-card.status-offline-card { border-left-color: var(--status-offline); }
+        .summary-card.status-offline-card .summary-value { color: var(--status-offline); }
+        .summary-card.status-disabled-card { border-left-color: var(--status-disabled); }
+        .summary-card.status-disabled-card .summary-value { color: var(--status-disabled); }
+        @media (max-width: 768px) {
+            body { padding: 10px; } .card { padding: 15px; } th, td { padding: 8px; font-size: 0.9em;}
+            .action-buttons button { padding: 8px 10px; font-size: 0.8em;} .add-license-form { flex-direction: column; align-items: stretch; }
+            .summary-card { min-width: 120px; padding: 15px; } .summary-value { font-size: 1.8em;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Login View -->
+        <div id="login-view" class="card">
+            <h1>Admin Panel Login</h1>
+            <p>Silakan masuk menggunakan akun admin Anda.</p>
+            <input type="email" id="login-email" placeholder="Email Admin">
+            <input type="password" id="login-password" placeholder="Password">
+            <button id="login-button" class="btn-primary">Login</button>
+            <div id="login-message" class="message hidden"></div>
+        </div>
+
+        <!-- Admin Dashboard View -->
+        <div id="dashboard-view" class="card hidden">
+            <button id="logout-button" class="btn-danger">Logout</button>
+            <h1>Dashboard Lisensi</h1>
+            <p>Admin ter-login sebagai: <strong id="admin-email-display"></strong></p>
+            
+            <!-- Kartu Ringkasan Status Lisensi (BARU) -->
+            <div class="summary-container">
+                <div class="summary-card">
+                    <h4>Total Lisensi</h4>
+                    <div class="summary-value" id="total-count">0</div>
+                </div>
+                <div class="summary-card status-online-card">
+                    <h4>Online</h4>
+                    <div class="summary-value" id="online-count">0</div>
+                </div>
+                <div class="summary-card status-idle-card">
+                    <h4>Idle</h4>
+                    <div class="summary-value" id="idle-count">0</div>
+                </div>
+                <div class="summary-card status-offline-card">
+                    <h4>Aktif (Offline)</h4>
+                    <div class="summary-value" id="offline-count">0</div>
+                </div>
+                <div class="summary-card status-disabled-card">
+                    <h4>Tidak Aktif</h4>
+                    <div class="summary-value" id="disabled-count">0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Tambah Lisensi Baru</h2>
+                <div class="add-license-form">
+                    <input type="text" id="new-license-key" placeholder="Masukkan Kode Lisensi Baru">
+                    <button id="add-license-button" class="btn-success">Tambah</button>
+                </div>
+                <div id="add-license-message" class="message hidden"></div>
+            </div>
+
+            <h2>Daftar Lisensi Pengguna</h2>
+            <div id="loading-indicator">Memuat data lisensi...</div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Kode Lisensi</th>
+                            <th>Nama Pengguna</th>
+                            <th>Terakhir Dilihat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="licenses-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- User History View (BARU) -->
+        <div id="history-view" class="card hidden">
+            <h2 id="history-view-title">Riwayat Kuis Pengguna</h2>
+            <div id="history-loading-indicator">Memuat riwayat...</div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Kuis</th>
+                            <th>Skor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody"></tbody>
+                </table>
+            </div>
+            <button id="back-to-dashboard-button" class="btn-primary" style="margin-top: 20px;">Kembali ke Dashboard</button>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>
