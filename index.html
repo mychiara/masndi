@@ -21,8 +21,8 @@
       SEO & META TAGS DINAMIS: Elemen-elemen ini sekarang terikat (bound) ke 'articleData' amp-state.
       Nilainya akan berubah secara otomatis saat pengunjung membuka artikel. Ini KRUSIAL untuk SEO.
     -->
-    <link rel="canonical" href="https://Masandigital.com/index.html"
-          [href]="articleData.url ? articleData.url : 'https://Masandigital.com/index.html'">
+    <link rel="canonical" href="${SITE_URL}/index.html"
+          [href]="articleData.url ? articleData.url : '${SITE_URL}index.html'">
           
     <title [text]="articleData.judul ? articleData.judul + ' - Masandigital.com' : 'Masandigital.com'">Masandigital.com</title> 
     
@@ -43,8 +43,8 @@
           [content]="articleData.gambar_fitur ? articleData.gambar_fitur : 'https://masandigital.com/default-og-image.jpg'">
 
     <meta property="og:url" id="og-url" 
-          content="https://Masandigital.com/index.html"
-          [content]="articleData.url ? articleData.url : 'https://Masandigital.com/index.html'">
+          content="${SITE_URL}/index.html"
+          [content]="articleData.url ? articleData.url : '${SITE_URL}/index.html'">
           
     <meta property="og:type" id="og-type" 
           content="website"
