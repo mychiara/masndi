@@ -1,352 +1,508 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html amp lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masandigital.com - AI-Powered Content Hub</title>
-    <meta name="description" content="Masandigital.com: Your go-to source for high-quality, AI-generated articles and insightful guides on diverse topics, including in-depth comparisons.">
+    <meta name="viewport" content="width=device-width">
+    
+    <!-- 
+      AMP SCRIPTS: Required scripts for AMP functionality.
+      Each component (forms, lists, etc.) needs its own script.
+    -->
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-state" src="https://cdn.ampproject.org/v0/amp-state-0.1.js"></script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
 
-    <link rel="icon" href="assets/images/favicon.ico" sizes="any">
-    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <!--
+      SEO & META TAGS DINAMIS: Elemen-elemen ini sekarang terikat (bound) ke 'articleData' amp-state.
+      Nilainya akan berubah secara otomatis saat pengunjung membuka artikel. Ini KRUSIAL untuk SEO.
+    -->
+    <link rel="canonical" href="https://Masandigital.com/index.html"
+          [href]="articleData.url ? articleData.url : 'https://Masandigital.com/index.html'">
+          
+    <title [text]="articleData.judul ? articleData.judul + ' - Masandigital.com' : 'Masandigital.com'">Masandigital.com</title> 
+    
+    <meta name="description" id="meta-description" 
+          content="A personal blog about technology, design, and life adventures—told through inspiring stories and stunning visuals. Explore ideas, works, and journeys."
+          [content]="articleData.cuplikan ? articleData.cuplikan : 'A personal blog about technology, design, and life adventures—told through inspiring stories and stunning visuals. Explore ideas, works, and journeys.'">
 
+    <meta property="og:title" id="og-title" 
+          content="Masandigital.com"
+          [content]="articleData.judul ? articleData.judul : 'Masandigital.com'">
+
+    <meta property="og:description" id="og-description" 
+          content="A personal blog about technology, design, and life adventures. Explore stories, creativity, and inspiration."
+          [content]="articleData.cuplikan ? articleData.cuplikan : 'A personal blog about technology, design, and life adventures. Explore stories, creativity, and inspiration.'">
+
+    <meta property="og:image" id="og-image" 
+          content="https://masandigital.com/default-og-image.jpg"
+          [content]="articleData.gambar_fitur ? articleData.gambar_fitur : 'https://masandigital.com/default-og-image.jpg'">
+
+    <meta property="og:url" id="og-url" 
+          content="https://Masandigital.com/index.html"
+          [content]="articleData.url ? articleData.url : 'https://Masandigital.com/index.html'">
+          
+    <meta property="og:type" id="og-type" 
+          content="website"
+          [content]="articleData.id ? 'article' : 'website'">
+    
+    <meta name="google-site-verification" content="4iOW_hDD8B-IRUAm7keHj2sZFwbLoXV_jQCJV-4CWsY" />
+    <meta name="google-site-verification" content="QV9FBw9pHOPWT746Ft1PLsRHIv-2KZwr0dAOEt6YmYQ" />
+    
+    <!-- Placeholder untuk Schema.org dinamis. Konten akan diisi dari 'articleData' state -->
+    <script id="schema-markup" type="application/ld+json" [text]="articleData.schema ? articleData.schema : '{}'"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
-    <link rel="stylesheet" href="assets/style.css">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Masandigital.com",
-      "url": "https://masandigital.com/",
-      "description": "High-quality articles generated by AI on various topics. Your go-to source for insightful content.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://masandigital.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Masandigital.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://masandigital.com/assets/images/logo.png"
-        }
-      }
+<style amp-custom>
+    /* [PASTE CONTENT OF https://fonts.googleapis.com/css2?family=Poppins... HERE] */
+    /* [PASTE CONTENT OF https://cdnjs.cloudflare.com/ajax/libs/font-awesome... HERE] */
+    :root {
+        --bg-dark: #0d0d1a;
+        --bg-surface: rgba(255, 255, 255, 0.07);
+        --bg-surface-hover: rgba(255, 255, 255, 0.12);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --primary-glow: #ff00c1;
+        --secondary-glow: #9a00ff;
+        --accent-color: #00e5ff;
+        --text-light: #e0e0e0;
+        --text-medium: #a0a0a0;
+        --text-dark: #ffffff;
+        --danger-color: #ff4d6d;
+        --font-heading: 'Poppins', sans-serif;
+        --font-body: 'Inter', sans-serif;
+        --border-radius: 16px;
+        --shadow-glow: 0 0 15px rgba(var(--primary-glow-rgb), 0.3), 0 0 30px rgba(var(--secondary-glow-rgb), 0.2);
     }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Masandigital",
-      "url": "https://masandigital.com/about.html",
-      "image": "https://masandigital.com/assets/images/author-photo.jpeg",
-      "sameAs": [
-        "https://www.facebook.com/mas4ndy/",
-        "https://www.instagram.com/maz_4ndy/",
-        "https://www.tiktok.com/@mazz_andy"
-      ],
-      "description": "Passionate about exploring the frontiers of AI and sharing high-quality, insightful articles."
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-body);
+        color: var(--text-light);
+        background-color: var(--bg-dark);
+        line-height: 1.7;
+        overflow-x: hidden;
+        position: relative;
     }
-    </script>
-
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(-45deg, var(--secondary-glow), var(--primary-glow), #00e5ff, #ff8c00);
+        background-size: 400% 400%;
+        animation: gradient-flow 20s ease infinite;
+        z-index: -1;
+        opacity: 0.4;
+        filter: blur(100px);
+    }
+    @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+    a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--text-dark); }
+    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+    .glass-effect {
+        background: var(--bg-surface);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius);
+        transition: background 0.3s ease, border 0.3s ease;
+    }
+    .glass-effect:hover { background: var(--bg-surface-hover); border-color: rgba(255, 255, 255, 0.2); }
+    .site-header {
+        padding: 1.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(13, 13, 26, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+    .site-header .logo a { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); text-shadow: 0 0 5px var(--primary-glow); }
+    .main-nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
+    .main-nav ul li a { padding: 10px 20px; font-weight: 600; color: var(--text-light); border-radius: 50px; position: relative; overflow: hidden; }
+    .main-nav ul li a::before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-glow), var(--accent-color));
+        transition: width 0.3s ease;
+    }
+    .main-nav ul li a.active, .main-nav ul li a:hover { color: var(--text-dark); }
+    .main-nav ul li a.active::before, .main-nav ul li a:hover::before { width: 80%; }
+    .hero-section { text-align: center; padding: 5rem 0; margin-bottom: 3rem; }
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, var(--primary-glow), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+    .hero-subtitle { font-size: 1.2rem; color: var(--text-medium); max-width: 600px; margin: 0 auto 2rem; }
+    .hero-search #search-input { background: var(--bg-surface); border: 1px solid var(--glass-border); color: var(--text-light); }
+    .main-wrapper { display: grid; grid-template-columns: 1fr 340px; gap: 40px; padding: 40px 0; }
+    .content-area { min-width: 0; }
+    .sidebar { flex-shrink: 0; }
+    .page-title { font-size: 2.8rem; margin-bottom: 2rem; padding-bottom: 10px; border-bottom: 2px solid var(--glass-border); display: inline-block; }
+    .page-title .category-name { color: var(--accent-color); }
+    #article-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+    .article-card { transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease; display: flex; flex-direction: column; }
+    .article-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(var(--primary-glow-rgb), 0.4), 0 0 40px rgba(var(--secondary-glow-rgb), 0.3); }
+    .card-image { position: relative; }
+    .card-image amp-img { width: 100%; height: 220px; object-fit: cover; display: block; border-radius: var(--border-radius) var(--border-radius) 0 0; }
+    .card-category { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: var(--bg-dark); padding: 5px 15px; border-radius: 50px; font-size: .8rem; font-weight: 700; text-transform: uppercase; }
+    .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-title a { font-size: 1.4rem; color: var(--text-dark); }
+    .card-excerpt { color: var(--text-medium); margin: 15px 0; flex-grow: 1; }
+    .card-meta { font-size: .85em; color: var(--text-medium); display: flex; flex-wrap: wrap; gap: 15px; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: auto; }
+    .card-meta i { margin-right: 8px; color: var(--accent-color); }
+    .single-article { padding: 40px; }
+    .article-featured-image { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: var(--border-radius); margin-bottom: 30px; }
+    .single-article h1.article-title { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
+    .single-article .meta { display: flex; flex-wrap: wrap; gap: 15px 30px; font-size: 1em; color: var(--text-medium); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
+    .single-article .meta i { margin-right: 8px; color: var(--accent-color); }
+    .article-content { font-size: 1.1rem; }
+    .article-content p { margin-bottom: 1.5em; }
+    .article-content h2, .article-content h3 { margin: 2em 0 1em; padding-bottom: 0.5em; border-bottom: 1px solid var(--glass-border); }
+    .article-content h2 { font-size: 1.8rem; }
+    .article-content h3 { font-size: 1.5rem; }
+    .article-content blockquote { margin: 1.5em 0; padding: 1.5em; border-left: 4px solid; border-image: linear-gradient(to bottom, var(--primary-glow), var(--accent-color)) 1; background-color: var(--bg-surface); border-radius: 0 8px 8px 0; font-style: italic; color: var(--text-light); }
+    .article-content ul, .article-content ol { padding-left: 2em; margin-bottom: 1.5em; }
+    .article-content li { margin-bottom: .5em; }
+    .article-content code { background: #2a2a3a; padding: 4px 8px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: var(--accent-color); }
+    .article-content amp-img { max-width: 100%; height: auto; border-radius: 12px; margin: 2em 0; }
+    .toc-container { padding: 25px; margin: 30px 0; }
+    .toc-title { font-size: 1.3rem; margin-bottom: 15px; }
+    .toc-list { list-style: none; padding-left: 10px; }
+    .toc-list a { font-weight: 500; font-size: 1rem; color: var(--text-medium); }
+    .toc-list a:hover { color: var(--accent-color); }
+    .toc-list .toc-h3 { padding-left: 20px; font-size: .9rem; }
+    .social-share-container { margin: 40px 0; padding-top: 25px; border-top: 1px solid var(--glass-border); }
+    .social-share-title { font-size: 1.2rem; font-family: var(--font-heading); margin-bottom: 20px; text-align: center; }
+    .social-share-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    amp-social-share { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; border-radius: 50%; font-size: 1.4rem; color: var(--text-light); background: var(--bg-surface); transition: all 0.3s ease; }
+    amp-social-share:hover { transform: translateY(-5px) scale(1.1); color: #fff; }
+    amp-social-share[type=facebook]:hover { background: #1877F2; }
+    amp-social-share[type=twitter]:hover { background: #1DA1F2; }
+    amp-social-share[type=linkedin]:hover { background: #0A66C2; }
+    amp-social-share[type=whatsapp]:hover { background: #25D366; }
+    amp-social-share[type=email]:hover { background: #7f8c8d; }
+    #related-posts { margin-top: 60px; }
+    .related-posts-title { font-size: 2.2rem; margin-bottom: 30px; border-bottom: 2px solid var(--glass-border); padding-bottom: 10px; display: inline-block; }
+    #related-posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+    #related-posts-grid .article-card .card-image amp-img { height: 160px; }
+    .article-navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); }
+    .nav-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-family: var(--font-heading); transition: all 0.3s ease; background: var(--bg-surface); border: 1px solid var(--glass-border); color: var(--text-light); }
+    .nav-button:hover { background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow)); color: var(--text-dark); border-color: transparent; transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .nav-button.home:hover { background: linear-gradient(90deg, var(--accent-color), var(--primary-glow)); }
+    .sidebar .widget { padding: 25px; margin-bottom: 30px; }
+    .widget-title { font-size: 1.4rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+    .widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, var(--primary-glow), var(--accent-color)); border-radius: 2px; }
+    .sidebar .profile-pic { width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto 15px; border: 4px solid; border-image: linear-gradient(to right, var(--primary-glow), var(--accent-color)) 1; }
+    .category-list, .footer-widget ul { list-style: none; padding: 0; }
+    .category-list li { margin-bottom: 10px; }
+    .category-list li a { font-weight: 500; color: var(--text-medium); padding: 8px 0; display: block; transition: color 0.3s, transform 0.3s; }
+    .category-list li a:hover { color: var(--accent-color); transform: translateX(5px); }
+    #search-input { width: 100%; padding: 14px 20px; font-size: 1rem; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 50px; color: var(--text-light); transition: all 0.3s ease; }
+    #search-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 229, 255, 0.5); }
+    .site-footer { background: #080812; color: var(--text-medium); padding: 50px 0 0; margin-top: 50px; border-top: 1px solid var(--glass-border); }
+    .footer-widgets { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--glass-border); }
+    .footer-widget h4 { margin-bottom: 20px; font-size: 1.2rem; color: var(--text-dark); }
+    .social-links a { display: inline-flex; justify-content: center; align-items: center; width: 45px; height: 45px; background: var(--bg-surface); border-radius: 50%; margin-right: 10px; font-size: 1.2rem; color: var(--text-light); transition: all .3s ease; }
+    .social-links a:hover { background: var(--accent-color); color: var(--bg-dark); transform: translateY(-5px); }
+    .copyright { padding: 25px 0; font-size: .9em; text-align: center; }
+    .footer-widget ul a { color: var(--text-medium); transition: color .3s; }
+    .footer-widget ul a:hover { color: var(--accent-color); }
+    .loading-placeholder { padding: 50px; text-align: center; }
+    .spinner { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,.1); border-top-color: var(--accent-color); border-radius: 50%; animation: 1s linear infinite spin; margin: 0 auto 15px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-message { background: rgba(255, 77, 109, 0.1); border-left: 5px solid var(--danger-color); border-radius: var(--border-radius); padding: 20px; }
+    .error-message h2 { font-size: 1.5rem; color: var(--danger-color); }
+    #load-more-btn { border: none; padding: 15px 40px; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); border-radius: 50px; cursor: pointer; color: var(--text-dark); background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow)); transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    #load-more-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+    #load-more-btn:disabled { background: var(--text-medium); cursor: not-allowed; transform: translateY(0); box-shadow: none; }
+    @media (max-width: 992px) { .main-wrapper { grid-template-columns: 1fr; } .sidebar { margin-top: 50px; } .hero-title { font-size: 3rem; } }
+    @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } .page-title { font-size: 2.2rem; } .single-article { padding: 25px; } .single-article h1.article-title { font-size: 2.2rem; } .site-header .container { flex-direction: column; gap: 20px; } .main-nav ul { justify-content: center; } .article-navigation span { display: none; } .nav-button { padding: 12px; width: 55px; height: 55px; justify-content: center; gap: 0; } .nav-button i { font-size: 1.2rem; } }
+    @media (max-width: 480px) { .hero-title { font-size: 2.2rem; } .hero-subtitle { font-size: 1rem; } #article-list-grid { grid-template-columns: 1fr; } .single-article h1.article-title { font-size: 1.8rem; } }
+</style>
 </head>
 <body>
+
+    <amp-state id="siteConfig">
+        <script type="application/json">
+        {
+            "apiUrl": "https://script.google.com/macros/s/AKfycbwysZf9Jf9aBGcENjsS_7jACWousD8yRc_qdwf5HF66ozSWT5lS0m7o52nFYG5FdJ8Vtw/exec",
+            "domain": "masandigital.com",
+            "baseUrl": "https://masandigital.com/index.html"
+        }
+        </script>
+    </amp-state>
+    <amp-state id="query"></amp-state>
+    
+    <!-- PERUBAHAN: State baru untuk menyimpan data artikel tunggal. Akan diisi oleh amp-list. -->
+    <amp-state id="articleData"><script type="application/json">{}</script></amp-state>
+
     <header class="site-header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo-area">
-                    <a href="index.html" class="site-logo-link">
-                        <h1 class="site-title">Masandigital.com</h1>
-                    </a>
-                    <p class="site-tagline">AI-powered content hub offering informative guides and articles on diverse topics, featuring in-depth comparisons and insights</p>
-                </div>
-
-                <div class="header-right-column">
-                    <div class="search-container">
-                        <input type="search" id="headerSearchInput" placeholder="Search articles..." aria-label="Search articles">
-                        <button id="headerSearchButton" aria-label="Search">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <button class="nav-toggler" id="navToggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-                
-                <nav class="nav-menu" id="navMenu">
-                    <a href="index.html" class="nav-link active" aria-current="page">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <a href="privacy.html" class="nav-link">Privacy Policy</a>
-                    <a href="disclaimer.html" class="nav-link">Disclaimer</a>
-                </nav>
+            <div class="logo">
+                <a href="index.html">Masandigital.com</a>
             </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <div class="container page-wrapper">
-        <main class="main-content-area">
-            <section class="other-projects-showcase" aria-labelledby="other-projects-title">
-                <h3 class="section-title" id="other-projects-title">My Other Projects</h3>
-                            <section class="other-projects-showcase" aria-labelledby="other-projects-title">
-                <div class="projects-showcase-grid">
-                    <div class="project-showcase-item">
-                        <a href="https://watermarks.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><path d="M12 12.5a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 0 0 5z"></path></svg>
-                            <span>Tools Watermark</span>
-                        </a>
+    <div class="main-wrapper container">
+        <main class="content-area">
+            
+            <div id="homepage-view" [hidden]="query.id">
+                <section class="hero-section">
+                    <h1 class="hero-title">Where Ideas Begin, and Inspiration Never Ends</h1>
+                    <p class="hero-subtitle">A personal blog about technology, design, and life adventures—wrapped in stunning and immersive visuals.</p>
+                    <div class="hero-search">
+                         <form id="search-form" role="search" method="GET" action="index.html" target="_top">
+                            <input type="search" id="search-input" name="search" placeholder="Explore the content that sparks your curiosity..." required>
+                        </form>
                     </div>
-                    <div class="project-showcase-item">
-                        <a href="https://demo-ukom.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            <span>App Uji Kompetensi</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://keyword-trend.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                           <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                            <span>Keyword Trending Generator</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://tb-screening.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M10.5 10.5L13.5 13.5M13.5 10.5L10.5 13.5"></path></svg>
-                            <span>App TB Screening</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://ptm-screening.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path><line x1="12" y1="8" x2="12" y2="15"></line><line x1="8" y1="12" x2="15" y2="12"></line></svg>
-                            <span>App PTM Screening</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://kti-generator.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                            <span>KTI Generator</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://andy-promptgenerator.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path><line x1="9" y1="10" x2="15" y2="10"></line><line x1="9" y1="14" x2="13" y2="14"></line></svg>
-                            <span>Prompt Generator</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item">
-                        <a href="https://freegmail.netlify.app/" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span>Free Gmail Generator</span>
-                        </a>
-                    </div>
-                    <div class="project-showcase-item"> <!-- NEW ITEM -->
-                        <a href="https://lynk.id/mascleine" target="_blank" rel="noopener noreferrer" class="project-showcase-link">
-                            <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                            <span>Tools For Sale</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <section class="featured-posts" aria-labelledby="featured-articles-title">
-                <h3 class="section-title" id="featured-articles-title">Featured Articles</h3>
-                <div class="posts-grid">
-                    <article class="article-card" aria-labelledby="article-title-1">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-1"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h3>
-                            <p class="excerpt">Embark on a journey to the most thrilling adventure destinations across the globe...</p>
-                            <a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Adventure Places in the World</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-2">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-2"><a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html">Hotels with Activities for Families: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Discover hotels that offer more than just a stay. Our guide helps you find family-friendly resorts...</p>
-                            <a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Hotels with Activities for Families</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-3">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-3"><a href="posts/best-family-holiday-company-a-comprehensive-guide.html">Best Family Holiday Company: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Planning a family vacation? Choosing the right holiday company can make all the difference...</p>
-                            <a href="posts/best-family-holiday-company-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Family Holiday Company</span></a>
-                        </div>
-                    </article>
-                     <article class="article-card" aria-labelledby="article-title-4">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-4"><a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html">Best Adventure Trips in Europe: A Comprehensive Guide for the Discerning Traveler</a></h3>
-                            <p class="excerpt">Europe offers a diverse range of adventure trips, from hiking majestic mountains to exploring historic coastlines...</p>
-                            <a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Best Adventure Trips in Europe</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-5">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-5"><a href="posts/cheap-adventure-holidays-europe-a-comprehensive-guide.html">Cheap Adventure Holidays Europe: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Explore budget-friendly adventure holidays across Europe. Find tips and destinations for an affordable thrill...</p>
-                            <a href="posts/cheap-adventure-holidays-europe-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Cheap Adventure Holidays Europe</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-6">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-6"><a href="posts/great-family-holidays-abroad-a-comprehensive-guide.html">Great Family Holidays Abroad: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Discover top destinations for great family holidays abroad. Create unforgettable memories with your loved ones...</p>
-                            <a href="posts/great-family-holidays-abroad-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Great Family Holidays Abroad</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-7">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-7"><a href="posts/kids-activity-holidays-uk-a-comprehensive-guide.html">Kids Activity Holidays UK: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Find the best kids' activity holidays in the UK. Keep your children entertained and active during their break...</p>
-                            <a href="posts/kids-activity-holidays-uk-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Kids Activity Holidays UK</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-8">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-8"><a href="posts/organized-trips-for-young-adults-a-comprehensive-guide.html">Organized Trips for Young Adults: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Explore exciting organized trips tailored for young adults. Adventure, culture, and new friends await...</p>
-                            <a href="posts/organized-trips-for-young-adults-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Organized Trips for Young Adults</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-9">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-9"><a href="posts/east-coast-adventure-vacations-a-comprehensive-guide.html">East Coast Adventure Vacations: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Discover thrilling adventure vacations along the East Coast. From mountains to shores, find your next escape...</p>
-                            <a href="posts/east-coast-adventure-vacations-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about East Coast Adventure Vacations</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-10">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-10"><a href="posts/family-activity-weekend-breaks-a-comprehensive-guide.html">Family Activity Weekend Breaks: A Comprehensive Guide</a></h3>
-                            <p class="excerpt">Plan the perfect family activity weekend break. Ideas and destinations for a fun-filled short getaway...</p>
-                            <a href="posts/family-activity-weekend-breaks-a-comprehensive-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Family Activity Weekend Breaks</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-11">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-11"><a href="posts/unlocking-creativity-ai-content-generation.html">Unlocking Creativity: The Power of AI in Content Generation</a></h3>
-                            <p class="excerpt">Explore how Artificial Intelligence is revolutionizing content creation, offering new avenues for creativity and efficiency...</p>
-                            <a href="posts/unlocking-creativity-ai-content-generation.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Unlocking Creativity with AI</span></a>
-                        </div>
-                    </article>
-                    <article class="article-card" aria-labelledby="article-title-12">
-                        <div class="article-content">
-                            <h3 class="article-title" id="article-title-12"><a href="posts/navigating-digital-privacy-essential-guide.html">Navigating Digital Privacy: An Essential Guide for Today's User</a></h3>
-                            <p class="excerpt">Understand the complexities of digital privacy and learn how to protect your personal information online effectively...</p>
-                            <a href="posts/navigating-digital-privacy-essential-guide.html" class="read-more">Read More <span>→</span><span class="visually-hidden"> about Navigating Digital Privacy</span></a>
-                        </div>
-                    </article>
-                </div>
-            </section>
+                <h2 class="page-title" id="page-title"
+                    [text]="query.search ? 'Search Results: ' + query.search : (query.kategori ? 'Category: ' + query.kategori : 'Recent Articles')">
+                    Recent Articles
+                </h2>
 
-            <section class="social-media-follow" aria-labelledby="social-media-title">
-                <h2 class="section-title" id="social-media-title">Follow Me</h2>
-                <div class="social-media-grid">
-                    <div class="social-media-item">
-                        <a href="https://www.facebook.com/mas4ndy/" target="_blank" rel="noopener noreferrer" class="social-media-link facebook">
-                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                            <span>Facebook</span>
-                        </a>
+                <amp-list id="article-list-grid"
+                    width="auto"
+                    height="800"
+                    layout="responsive"
+                    [src]="siteConfig.apiUrl + '?action=getArticles&domain=' + siteConfig.domain + (query.kategori ? '&kategori=' + query.kategori : '') + (query.search ? '&search=' + query.search : '')"
+                    items="articles"
+                    load-more="manual"
+                    load-more-bookmark="next">
+                    <template type="amp-mustache">
+                        <article class="article-card glass-effect">
+                            <div class="card-image">
+                                <a href="index.html?id={{id}}">
+                                    <amp-img src="{{gambar_fitur}}" width="400" height="220" layout="responsive" alt="{{judul}}"></amp-img>
+                                </a>
+                                <span class="card-category">{{kategori}}</span>
+                            </div>
+                            <div class="card-content">
+                                <h2 class="card-title"><a href="index.html?id={{id}}">{{judul}}</a></h2>
+                                <p class="card-excerpt">{{cuplikan}}</p>
+                                <div class="card-meta">
+                                    <span><i class="fa-solid fa-user"></i> {{penulis}}</span>
+                                    <span><i class="fa-solid fa-calendar-days"></i> {{tanggal_publikasi}}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                    <div placeholder class="loading-placeholder">
+                        <div class="spinner"></div><p>Memuat Artikel...</p>
                     </div>
-                    <div class="social-media-item">
-                        <a href="https://www.instagram.com/maz_4ndy/" target="_blank" rel="noopener noreferrer" class="social-media-link instagram">
-                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                            <span>Instagram</span>
-                        </a>
+                    <div fallback>
+                        <div class="error-message">
+                            <h2>Tidak Ada Artikel</h2>
+                            <p>Tidak ada artikel yang ditemukan untuk tampilan ini.</p>
+                        </div>
                     </div>
-                    <div class="social-media-item">
-                        <a href="https://www.tiktok.com/@mazz_andy" target="_blank" rel="noopener noreferrer" class="social-media-link tiktok">
-                            <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2.5 2.5 0 0 1 2.41 3.09A6.5 6.5 0 0 0 17 4.5V9a4.5 4.5 0 1 1-9 0V4.5A6.5 6.5 0 0 0 10.59 2A2.5 2.5 0 0 1 12 2z"></path><path d="M17 9v4.5a2.5 2.5 0 1 1-5 0V9"></path></svg>
-                            <span>TikTok</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
+                    <button id="load-more-btn" load-more-button>Load More Articles</button>
+                </amp-list>
 
+            </div>
+
+            <div id="single-article-view" [hidden]="!query.id">
+                <!-- 
+                    PERUBAHAN: 
+                    1. Endpoint diubah ke 'action=getSingleArticle'.
+                    2. 'on="amp-list-load-end..."' ditambahkan untuk mengisi 'articleData' state,
+                       yang kemudian akan memperbarui meta tag di <head>.
+                -->
+                <amp-list width="auto" height="1000" layout="responsive" single-item items="." 
+                          [src]="siteConfig.apiUrl + '?action=getSingleArticle&id=' + query.id + '&domain=' + siteConfig.domain"
+                          on="amp-list-load-end:AMP.setState({ articleData: event.response })">
+                    <template type="amp-mustache">
+                        <article class="single-article glass-effect">
+                            {{#gambar_fitur}}
+                            <amp-img src="{{gambar_fitur}}" class="article-featured-image" width="800" height="450" layout="responsive" alt="{{judul}}"></amp-img>
+                            {{/gambar_fitur}}
+                            <h1 class="article-title">{{judul}}</h1>
+                            <div class="meta">
+                                <span><i class="fa-solid fa-user"></i> {{penulis}}</span>
+                                <span><i class="fa-solid fa-calendar-days"></i> {{tanggal_publikasi}}</span>
+                                {{#kategori}}<span><i class="fa-solid fa-tag"></i> {{kategori}}</span>{{/kategori}}
+                            </div>
+
+                            <amp-script script="toc-generator" layout="container">
+                                <div id="toc-container" class="toc-container glass-effect" hidden>
+                                    <p class="toc-title"><i class="fa-solid fa-list-ol"></i> Daftar Isi</p>
+                                    <ul id="toc-list" class="toc-list"></ul>
+                                </div>
+                                <div id="article-content-wrapper" class="article-content">
+                                    {{{konten}}}
+                                </div>
+                            </amp-script>
+
+                            <div class="social-share-container">
+                                <h3 class="social-share-title">Share this article</h3>
+                                <div class="social-share-buttons">
+                                    <amp-social-share type="facebook" width="50" height="50" aria-label="Bagikan ke Facebook"></amp-social-share>
+                                    <amp-social-share type="twitter" width="50" height="50" aria-label="Bagikan ke Twitter"></amp-social-share>
+                                    <amp-social-share type="linkedin" width="50" height="50" aria-label="Bagikan ke LinkedIn"></amp-social-share>
+                                    <amp-social-share type="whatsapp" width="50" height="50" aria-label="Bagikan ke WhatsApp"></amp-social-share>
+                                    <amp-social-share type="email" width="50" height="50" aria-label="Bagikan via Email"></amp-social-share>
+                                </div>
+                            </div>
+                        </article>
+
+                        <section id="related-posts" {{^relatedArticles}}hidden{{/relatedArticles}}>
+                            <h2 class="related-posts-title">Read Also</h2>
+                            <div id="related-posts-grid">
+                                {{#relatedArticles}}
+                                <article class="article-card glass-effect">
+                                    <div class="card-image">
+                                        <a href="index.html?id={{id}}"><amp-img src="{{gambar_fitur}}" alt="{{judul}}" layout="responsive" width="400" height="160"></amp-img></a>
+                                        <span class="card-category">{{kategori}}</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3 class="card-title" style="font-size: 1.2rem;"><a href="index.html?id={{id}}">{{judul}}</a></h3>
+                                    </div>
+                                </article>
+                                {{/relatedArticles}}
+                            </div>
+                        </section>
+                        
+                        <nav class="article-navigation">
+                            <a href="index.html?id={{prevId}}" class="nav-button prev" [class]="'nav-button prev' + (!prevId ? ' hidden' : '')"><i class="fa-solid fa-arrow-left"></i> <span>Sebelumnya</span></a>
+                            <a href="index.html" class="nav-button home"><i class="fa-solid fa-house"></i> <span>Beranda</span></a>
+                            <a href="index.html?id={{nextId}}" class="nav-button next" [class]="'nav-button next' + (!nextId ? ' hidden' : '')"><span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i></a>
+                        </nav>
+                    </template>
+                    <div placeholder class="loading-placeholder">
+                        <div class="spinner"></div><p>Memuat Artikel...</p>
+                    </div>
+                    <div fallback class="error-message">
+                        <h2>404 - Artikel Tidak Ditemukan</h2>
+                        <p>Maaf, artikel yang Anda cari tidak ada atau telah dipindahkan.</p>
+                    </div>
+                </amp-list>
+            </div>
         </main>
 
-        <aside class="sidebar-area" aria-labelledby="sidebar-title-main">
-            <section class="author-profile-sidebar" aria-labelledby="author-name-sidebar">
-                <img src="assets/images/author-photo.jpeg" alt="Author Masandigital" class="author-image-sidebar" width="120" height="120" loading="lazy">
-                <h3 class="author-name-sidebar" id="author-name-sidebar">Mas Andy</h3>
-                <p class="author-bio-sidebar">
-                    Welcome to Masandigital.com! I'm passionate about exploring the frontiers of AI and sharing high-quality, insightful articles on a variety of topics. My goal is to make complex subjects accessible and engaging.
-                </p>
-            </section>
-
-            <section class="all-posts-sidebar" aria-labelledby="all-articles-sidebar-title">
-                <h2 class="sidebar-title" id="all-articles-sidebar-title">Recent Articles</h2> <!-- Changed title to Recent Articles -->
-                <div class="posts-list-sidebar">
-                    <!-- Displaying only the first 10 articles (which is <= 12) -->
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/best-adventure-places-in-the-world-a-connoisseurs-guide.html">Best Adventure Places in the World: A Connoisseur's Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/hotels-with-activities-for-families-a-comprehensive-guide.html">Hotels with Activities for Families: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/best-family-holiday-company-a-comprehensive-guide.html">Best Family Holiday Company: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/best-adventure-trips-in-europe-a-comprehensive-guide-for-the-discerning-traveler.html">Best Adventure Trips in Europe: A Comprehensive Guide for the Discerning Traveler</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/cheap-adventure-holidays-europe-a-comprehensive-guide.html">Cheap Adventure Holidays Europe: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/great-family-holidays-abroad-a-comprehensive-guide.html">Great Family Holidays Abroad: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/kids-activity-holidays-uk-a-comprehensive-guide.html">Kids Activity Holidays UK: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/organized-trips-for-young-adults-a-comprehensive-guide.html">Organized Trips for Young Adults: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/east-coast-adventure-vacations-a-comprehensive-guide.html">East Coast Adventure Vacations: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <div class="post-list-item-sidebar">
-                        <h4 class="post-list-title-sidebar"><a href="posts/family-activity-weekend-breaks-a-comprehensive-guide.html">Family Activity Weekend Breaks: A Comprehensive Guide</a></h4>
-                        <div class="post-meta-sidebar"><time datetime="2025-05-18">18/5/2025</time></div>
-                    </div>
-                    <!-- Sisa artikel (jika ada lebih dari 10) tidak ditampilkan -->
-                </div>
-            </section>
+        <aside class="sidebar">
+            <div class="widget glass-effect">
+                <h3 class="widget-title">About Me</h3>
+                <amp-img src="https://masandigital.com/assets/images/author-photo.jpeg" alt="Foto profil" class="profile-pic" width="100" height="100"></amp-img>
+                <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures. I hope you find it useful and inspiring!</p>
+            </div>
+            <div class="widget glass-effect">
+                <h3 class="widget-title">Categories</h3>
+                <!-- PERUBAHAN: Endpoint diubah ke 'getSidebarData' dan 'items' disesuaikan -->
+                <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="siteConfig.apiUrl + '?action=getSidebarData&domain=' + siteConfig.domain" items="categories">
+                     <template type="amp-mustache">
+                        <li><a href="index.html?kategori={{.}}">{{.}}</a></li>
+                    </template>
+                    <div placeholder><li>Memuat kategori...</li></div>
+                </amp-list>
+            </div>
+            <div class="widget glass-effect">
+                <h3 class="widget-title">Latest Articles</h3>
+                 <!-- PERUBAHAN: Endpoint diubah ke 'getSidebarData' dan 'items' disesuaikan -->
+                <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="siteConfig.apiUrl + '?action=getSidebarData&domain=' + siteConfig.domain" items="recentPosts">
+                    <template type="amp-mustache">
+                        <li><a href="index.html?id={{id}}">{{judul}}</a></li>
+                    </template>
+                    <div placeholder><li>Memuat artikel...</li></div>
+                </amp-list>
+            </div>
         </aside>
+
     </div>
 
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-nav" aria-label="Footer navigation">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+             <div class="footer-widgets">
+                <div class="footer-widget">
+                    <h4>About This Blog</h4>
+                    <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures. I hope you find it useful and inspiring!</p>
                 </div>
-                <p class="copyright">© <span id="currentYear"></span> Masandigital.com. All rights reserved.</p>
+                <div class="footer-widget">
+                    <h4>Important Links</h4>
+                    <ul class="category-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="tos.html">TOS</a></li>
+                        <li><a id="sitemap-link" [href]="siteConfig.apiUrl + '?action=sitemap&domain=' + siteConfig.domain" target="_blank" rel="noopener noreferrer">Sitemap</a></li>
+                        <li><a id="rss-link" [href]="siteConfig.apiUrl + '?action=rss&domain=' + siteConfig.domain" target="_blank" rel="noopener noreferrer">RSS Feed</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-widget">
+                    <h4>Follow Me</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Masandigital.com.❤.</p>
             </div>
         </div>
     </footer>
 
-    <script src="assets/script.js" defer></script>
+    <script id="toc-generator" type="text/plain" target="amp-script">
+      const tocList = document.getElementById('toc-list');
+      const tocContainer = document.getElementById('toc-container');
+      const contentWrapper = document.getElementById('article-content-wrapper');
+      
+      if (!tocList || !contentWrapper || !tocContainer) return;
+
+      const headings = contentWrapper.querySelectorAll('h2, h3');
+      if (headings.length < 2) {
+        tocContainer.hidden = true;
+        return;
+      }
+      
+      let tocHTML = '';
+      headings.forEach((heading, index) => {
+        const id = 'heading-' + index;
+        heading.id = id;
+        const levelClass = heading.tagName === 'H3' ? 'class="toc-h3"' : '';
+        tocHTML += `<li ${levelClass}><a href="#${id}">${heading.textContent}</a></li>`;
+      });
+      
+      tocList.innerHTML = tocHTML;
+      tocContainer.hidden = false;
+    </script>
 </body>
 </html>
