@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Meta tag akan diisi oleh server, ini hanya fallback -->
     <title>Masandigital.com</title> 
-    <meta name="description" content="A personal blog about technology, design, and life adventures—told through inspiring stories and stunning visuals. Explore ideas, works, and journeys.">
     
+    <meta name="description" id="meta-description" content="A personal blog about technology, design, and life adventures—told through inspiring stories and stunning visuals. Explore ideas, works, and journeys.">
+    <meta property="og:title" id="og-title" content="Masandigital.com">
+    <meta property="og:description" id="og-description" content="A personal blog about technology, design, and life adventures. Explore stories, creativity, and inspiration.">
+    <meta property="og:image" id="og-image" content="https://i.pravatar.cc/150?img=32">
+    <meta property="og:url" id="og-url" content="https://Masandigital.com">
+    <meta property="og:type" id="og-type" content="website">
     <meta name="google-site-verification" content="4iOW_hDD8B-IRUAm7keHj2sZFwbLoXV_jQCJV-4CWsY" />
     <meta name="google-site-verification" content="QV9FBw9pHOPWT746Ft1PLsRHIv-2KZwr0dAOEt6YmYQ" />
+    <script id="schema-markup" type="application/ld+json"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,22 +21,200 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <?!= HtmlService.createHtmlOutputFromFile('styles').getContent() ?>
-
+<style>
+    :root {
+        --bg-dark: #0d0d1a;
+        --bg-surface: rgba(255, 255, 255, 0.07);
+        --bg-surface-hover: rgba(255, 255, 255, 0.12);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --primary-glow: #ff00c1;
+        --secondary-glow: #9a00ff;
+        --accent-color: #00e5ff;
+        --text-light: #e0e0e0;
+        --text-medium: #a0a0a0;
+        --text-dark: #ffffff;
+        --danger-color: #ff4d6d;
+        --font-heading: 'Poppins', sans-serif;
+        --font-body: 'Inter', sans-serif;
+        --border-radius: 16px;
+        --shadow-glow: 0 0 15px rgba(var(--primary-glow-rgb), 0.3), 0 0 30px rgba(var(--secondary-glow-rgb), 0.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-body);
+        color: var(--text-light);
+        background-color: var(--bg-dark);
+        line-height: 1.7;
+        overflow-x: hidden;
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(-45deg, var(--secondary-glow), var(--primary-glow), #00e5ff, #ff8c00);
+        background-size: 400% 400%;
+        animation: gradient-flow 20s ease infinite;
+        z-index: -1;
+        opacity: 0.4;
+        filter: blur(100px);
+    }
+    @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+    a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--text-dark); }
+    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+    .glass-effect {
+        background: var(--bg-surface);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius);
+        transition: background 0.3s ease, border 0.3s ease;
+    }
+    .glass-effect:hover { background: var(--bg-surface-hover); border-color: rgba(255, 255, 255, 0.2); }
+    .site-header {
+        padding: 1.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(13, 13, 26, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+    .site-header .logo a { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); text-shadow: 0 0 5px var(--primary-glow); }
+    .main-nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
+    .main-nav ul li a { padding: 10px 20px; font-weight: 600; color: var(--text-light); border-radius: 50px; position: relative; overflow: hidden; }
+    .main-nav ul li a::before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-glow), var(--accent-color));
+        transition: width 0.3s ease;
+    }
+    .main-nav ul li a.active, .main-nav ul li a:hover { color: var(--text-dark); }
+    .main-nav ul li a.active::before, .main-nav ul li a:hover::before { width: 80%; }
+    .hero-section { text-align: center; padding: 5rem 0; margin-bottom: 3rem; }
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, var(--primary-glow), var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+    .hero-subtitle { font-size: 1.2rem; color: var(--text-medium); max-width: 600px; margin: 0 auto 2rem; }
+    .hero-search #search-input { background: var(--bg-surface); border: 1px solid var(--glass-border); color: var(--text-light); }
+    .main-wrapper { display: grid; grid-template-columns: 1fr 340px; gap: 40px; padding: 40px 0; }
+    .content-area { min-width: 0; }
+    .sidebar { flex-shrink: 0; }
+    .page-title { font-size: 2.8rem; margin-bottom: 2rem; padding-bottom: 10px; border-bottom: 2px solid var(--glass-border); display: inline-block; }
+    .page-title .category-name { color: var(--accent-color); }
+    #article-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+    .article-card { transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease; display: flex; flex-direction: column; }
+    .article-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(var(--primary-glow-rgb), 0.4), 0 0 40px rgba(var(--secondary-glow-rgb), 0.3); }
+    .card-image { position: relative; }
+    .card-image img { width: 100%; height: 220px; object-fit: cover; display: block; border-radius: var(--border-radius) var(--border-radius) 0 0; }
+    .card-category { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: var(--bg-dark); padding: 5px 15px; border-radius: 50px; font-size: .8rem; font-weight: 700; text-transform: uppercase; }
+    .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-title a { font-size: 1.4rem; color: var(--text-dark); }
+    .card-excerpt { color: var(--text-medium); margin: 15px 0; flex-grow: 1; }
+    .card-meta { font-size: .85em; color: var(--text-medium); display: flex; flex-wrap: wrap; gap: 15px; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: auto; }
+    .card-meta i { margin-right: 8px; color: var(--accent-color); }
+    .single-article { padding: 40px; }
+    .article-featured-image { width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: var(--border-radius); margin-bottom: 30px; }
+    .single-article h1.article-title { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
+    .single-article .meta { display: flex; flex-wrap: wrap; gap: 15px 30px; font-size: 1em; color: var(--text-medium); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
+    .single-article .meta i { margin-right: 8px; color: var(--accent-color); }
+    .article-content { font-size: 1.1rem; }
+    .article-content p { margin-bottom: 1.5em; }
+    .article-content h2, .article-content h3 { margin: 2em 0 1em; padding-bottom: 0.5em; border-bottom: 1px solid var(--glass-border); }
+    .article-content h2 { font-size: 1.8rem; }
+    .article-content h3 { font-size: 1.5rem; }
+    .article-content blockquote { margin: 1.5em 0; padding: 1.5em; border-left: 4px solid; border-image: linear-gradient(to bottom, var(--primary-glow), var(--accent-color)) 1; background-color: var(--bg-surface); border-radius: 0 8px 8px 0; font-style: italic; color: var(--text-light); }
+    .article-content ul, .article-content ol { padding-left: 2em; margin-bottom: 1.5em; }
+    .article-content li { margin-bottom: .5em; }
+    .article-content code { background: #2a2a3a; padding: 4px 8px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; color: var(--accent-color); }
+    .article-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2em 0; }
+    .toc-container { padding: 25px; margin: 30px 0; }
+    .toc-title { font-size: 1.3rem; margin-bottom: 15px; }
+    .toc-list { list-style: none; padding-left: 10px; }
+    .toc-list a { font-weight: 500; font-size: 1rem; color: var(--text-medium); }
+    .toc-list a:hover { color: var(--accent-color); }
+    .toc-list .toc-h3 { padding-left: 20px; font-size: .9rem; }
+    .social-share-container { margin: 40px 0; padding-top: 25px; border-top: 1px solid var(--glass-border); }
+    .social-share-title { font-size: 1.2rem; font-family: var(--font-heading); margin-bottom: 20px; text-align: center; }
+    .social-share-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+    .social-share-buttons a { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; border-radius: 50%; font-size: 1.4rem; color: var(--text-light); background: var(--bg-surface); transition: all 0.3s ease; }
+    .social-share-buttons a:hover { transform: translateY(-5px) scale(1.1); color: #fff; }
+    .social-share-buttons a.share-facebook:hover { background: #1877F2; }
+    .social-share-buttons a.share-twitter:hover { background: #1DA1F2; }
+    .social-share-buttons a.share-linkedin:hover { background: #0A66C2; }
+    .social-share-buttons a.share-whatsapp:hover { background: #25D366; }
+    .social-share-buttons a.share-email:hover { background: #7f8c8d; }
+    #related-posts { margin-top: 60px; }
+    .related-posts-title { font-size: 2.2rem; margin-bottom: 30px; border-bottom: 2px solid var(--glass-border); padding-bottom: 10px; display: inline-block; }
+    #related-posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+    #related-posts-grid .article-card .card-image img { height: 160px; }
+    .article-navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); visibility: hidden; }
+    .nav-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-family: var(--font-heading); transition: all 0.3s ease; background: var(--bg-surface); border: 1px solid var(--glass-border); color: var(--text-light); }
+    .nav-button:hover { background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow)); color: var(--text-dark); border-color: transparent; transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .nav-button.home:hover { background: linear-gradient(90deg, var(--accent-color), var(--primary-glow)); }
+    .sidebar .widget { padding: 25px; margin-bottom: 30px; }
+    .widget-title { font-size: 1.4rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+    .widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, var(--primary-glow), var(--accent-color)); border-radius: 2px; }
+    .sidebar .profile-pic { width: 100px; height: 100px; border-radius: 50%; display: block; margin: 0 auto 15px; border: 4px solid; border-image: linear-gradient(to right, var(--primary-glow), var(--accent-color)) 1; }
+    .category-list, .footer-widget ul { list-style: none; padding: 0; }
+    .category-list li { margin-bottom: 10px; }
+    .category-list li a { font-weight: 500; color: var(--text-medium); padding: 8px 0; display: block; transition: color 0.3s, transform 0.3s; }
+    .category-list li a:hover { color: var(--accent-color); transform: translateX(5px); }
+    #search-input { width: 100%; padding: 14px 20px; font-size: 1rem; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 50px; color: var(--text-light); transition: all 0.3s ease; }
+    #search-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 229, 255, 0.5); }
+    .site-footer { background: #080812; color: var(--text-medium); padding: 50px 0 0; margin-top: 50px; border-top: 1px solid var(--glass-border); }
+    .footer-widgets { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--glass-border); }
+    .footer-widget h4 { margin-bottom: 20px; font-size: 1.2rem; color: var(--text-dark); }
+    .social-links a { display: inline-flex; justify-content: center; align-items: center; width: 45px; height: 45px; background: var(--bg-surface); border-radius: 50%; margin-right: 10px; font-size: 1.2rem; color: var(--text-light); transition: all .3s ease; }
+    .social-links a:hover { background: var(--accent-color); color: var(--bg-dark); transform: translateY(-5px); }
+    .copyright { padding: 25px 0; font-size: .9em; text-align: center; }
+    .footer-widget ul a { color: var(--text-medium); transition: color .3s; }
+    .footer-widget ul a:hover { color: var(--accent-color); }
+    #loading, #error { padding: 50px; text-align: center; }
+    .spinner { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,.1); border-top-color: var(--accent-color); border-radius: 50%; animation: 1s linear infinite spin; margin: 0 auto 15px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #error { background: rgba(255, 77, 109, 0.1); border-left: 5px solid var(--danger-color); border-radius: var(--border-radius); }
+    #error h2 { font-size: 1.5rem; color: var(--danger-color); }
+    #load-more-container { text-align: center; margin-top: 40px; }
+    #load-more-btn { border: none; padding: 15px 40px; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); border-radius: 50px; cursor: pointer; color: var(--text-dark); background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow)); transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    #load-more-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+    #load-more-btn:disabled { background: var(--text-medium); cursor: not-allowed; transform: translateY(0); box-shadow: none; }
+    @media (max-width: 992px) { .main-wrapper { grid-template-columns: 1fr; } .sidebar { margin-top: 50px; } .hero-title { font-size: 3rem; } }
+    @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } .page-title { font-size: 2.2rem; } .single-article { padding: 25px; } .single-article h1.article-title { font-size: 2.2rem; } .site-header .container { flex-direction: column; gap: 20px; } .main-nav ul { justify-content: center; } .article-navigation span { display: none; } .nav-button { padding: 12px; width: 55px; height: 55px; justify-content: center; gap: 0; } .nav-button i { font-size: 1.2rem; } }
+    @media (max-width: 480px) { .hero-title { font-size: 2.2rem; } .hero-subtitle { font-size: 1rem; } #article-list-grid { grid-template-columns: 1fr; } .single-article h1.article-title { font-size: 1.8rem; } }
+</style>
 </head>
 <body>
     <!-- ====== HEADER ====== -->
     <header class="site-header">
         <div class="container">
             <div class="logo">
-                <a href="<?= domain ?>">Masandigital.com</a>
+                <a href="index.html">Masandigital.com</a>
             </div>
             <nav class="main-nav">
                 <ul id="main-nav-list">
-                    <li><a href="<?= domain ?>" class="<?== pageType === 'list' && !currentFilter.value ? 'active' : '' ?>">Home</a></li>
-                    <!-- Navigasi statis lainnya bisa ditambahkan di sini -->
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <!-- Navigasi dinamis akan dimuat di sini -->
                 </ul>
             </nav>
         </div>
@@ -43,90 +226,38 @@
         <!-- ====== KONTEN UTAMA ====== -->
         <main class="content-area">
             
-            <? if (pageType === 'list') { ?>
             <div id="homepage-view">
                 <section class="hero-section">
                     <h1 class="hero-title">Where Ideas Begin, and Inspiration Never Ends</h1>
                     <p class="hero-subtitle">A personal blog about technology, design, and life adventures—wrapped in stunning and immersive visuals.</p>
                     <div class="hero-search">
-                         <form id="search-form" role="search" action="<?= domain ?>" method="get">
-                            <input type="search" name="search" id="search-input" placeholder="Explore the content that sparks your curiosity..." required>
+                         <form id="search-form" role="search">
+                            <input type="search" id="search-input" placeholder="Explore the content that sparks your curiosity..." required>
                         </form>
                     </div>
                 </section>
 
-                <h2 class="page-title" id="page-title"><?!= pageHeading ?></h2>
-                <div id="article-list-grid">
-                  <? if (articleData.articles && articleData.articles.length > 0) { ?>
-                    <? for (var i = 0; i < articleData.articles.length; i++) { var article = articleData.articles[i]; ?>
-                      <article class="article-card glass-effect">
-                          <div class="card-image">
-                              <a href="?id=<?= article.id ?>"><img src="<?= article.gambar_fitur || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=60' ?>" alt="<?= article.judul ?>" loading="lazy" width="400" height="220"></a>
-                              <span class="card-category"><?= article.kategori || 'Umum' ?></span>
-                          </div>
-                          <div class="card-content">
-                              <h2 class="card-title"><a href="?id=<?= article.id ?>"><?= article.judul ?></a></h2>
-                              <p class="card-excerpt"><?= article.cuplikan || 'Klik untuk membaca selengkapnya...' ?></p>
-                              <div class="card-meta">
-                                  <span><i class="fa-solid fa-user"></i> <?= article.penulis ?></span>
-                                  <span><i class="fa-solid fa-calendar-days"></i> <?= article.tanggal_publikasi ?></span>
-                              </div>
-                          </div>
-                      </article>
-                    <? } ?>
-                  <? } else { ?>
-                      <div style="grid-column: 1 / -1; text-align: center;"><h2>Tidak Ada Hasil</h2><p>Belum ada artikel yang cocok dengan kriteria Anda.</p></div>
-                  <? } ?>
-                </div>
-                <div id="load-more-container" style="<?= articleData.currentPage < articleData.totalPages ? 'display:block;' : 'display:none;' ?>">
+                <h2 class="page-title" id="page-title">Recent Articles</h2>
+                <div id="article-list-grid"></div>
+                <div id="load-more-container" style="display:none;">
                     <button id="load-more-btn">Load More Articles</button>
                 </div>
             </div>
-            <? } ?>
 
-            <? if (pageType === 'single') { ?>
-            <div id="single-article-view">
-                <article id="article-container" class="single-article glass-effect">
-                    <? if (article.gambar_fitur) { ?>
-                      <img src="<?= article.gambar_fitur ?>" alt="<?= article.judul ?>" class="article-featured-image" loading="eager">
-                    <? } ?>
-                    <h1 class="article-title"><?= article.judul ?></h1>
-                    <div class="meta">
-                        <span><i class="fa-solid fa-user"></i> <?= article.penulis ?></span>
-                        <span><i class="fa-solid fa-calendar-days"></i> <?= article.tanggal_publikasi ?></span>
-                        <? if (article.kategori) { ?>
-                          <span><i class="fa-solid fa-tag"></i> <?= article.kategori ?></span>
-                        <? } ?>
-                    </div>
-                    <div id="toc-container" class="toc-container glass-effect" style="display:none;"></div>
-                    <div id="article-content-wrapper" class="article-content"><?!= article.konten ?></div>
-                    <div id="social-share-container" class="social-share-container" style="display:none;"></div>
-                </article>
-
-                <? if (article.relatedArticles && article.relatedArticles.length > 0) { ?>
-                <section id="related-posts">
+            <div id="single-article-view" style="display:none;">
+                <article id="article-container" class="single-article glass-effect"></article>
+                <section id="related-posts" style="display:none;">
                     <h2 class="related-posts-title">Read Also</h2>
-                    <div id="related-posts-grid">
-                       <? for (var i = 0; i < article.relatedArticles.length; i++) { var related = article.relatedArticles[i]; ?>
-                        <article class="article-card glass-effect">
-                          <div class="card-image"><a href="?id=<?= related.id ?>"><img src="<?= related.gambar_fitur || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=60' ?>" alt="<?= related.judul ?>" loading="lazy" width="400" height="160"></a><span class="card-category"><?= related.kategori || 'Umum' ?></span></div>
-                          <div class="card-content"><h3 class="card-title" style="font-size: 1.2rem;"><a href="?id=<?= related.id ?>"><?= related.judul ?></a></h3></div>
-                        </article>
-                       <? } ?>
-                    </div>
+                    <div id="related-posts-grid"></div>
                 </section>
-                <? } ?>
-
                 <nav class="article-navigation" id="article-nav">
-                    <a href="?id=<?= article.prevId ?>" class="nav-button prev" id="nav-prev" style="<?= article.prevId ? 'visibility: visible;' : 'visibility: hidden;' ?>"><i class="fa-solid fa-arrow-left"></i> <span>Sebelumnya</span></a>
-                    <a href="<?= domain ?>" class="nav-button home"><i class="fa-solid fa-house"></i> <span>Beranda</span></a>
-                    <a href="?id=<?= article.nextId ?>" class="nav-button next" id="nav-next" style="<?= article.nextId ? 'visibility: visible;' : 'visibility: hidden;' ?>"><span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#" class="nav-button prev" id="nav-prev" style="visibility: hidden;"><i class="fa-solid fa-arrow-left"></i> <span>Sebelumnya</span></a>
+                    <a href="index.html" class="nav-button home"><i class="fa-solid fa-house"></i> <span>Beranda</span></a>
+                    <a href="#" class="nav-button next" id="nav-next" style="visibility: hidden;"><span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i></a>
                 </nav>
             </div>
-            <? } ?>
-            
-            <!-- Elemen loading & error sekarang hanya untuk interaksi JS, bukan load awal -->
-            <div id="loading" style="display:none;"><div class="spinner"></div><p>Memuat...</p></div>
+
+            <div id="loading"><div class="spinner"></div><p>Memuat...</p></div>
             <div id="error" style="display:none;"></div>
         </main>
 
@@ -140,36 +271,49 @@
             <div class="widget glass-effect">
                 <h3 class="widget-title">Categories</h3>
                 <ul class="category-list" id="sidebar-category-list">
-                    <? if (siteData && siteData.categories && siteData.categories.length > 0) { ?>
-                      <? for (var i = 0; i < siteData.categories.length; i++) { var category = siteData.categories[i]; ?>
-                        <li><a href="?kategori=<?= encodeURIComponent(category) ?>"><?= category ?></a></li>
-                      <? } ?>
-                    <? } else { ?>
-                      <li>Tidak ada kategori.</li>
-                    <? } ?>
+                    <li>Memuat kategori...</li>
                 </ul>
             </div>
             <div class="widget glass-effect">
                 <h3 class="widget-title">Latest Articles</h3>
                 <ul class="category-list" id="recent-posts-list">
-                   <? if (siteData && siteData.recentPosts && siteData.recentPosts.length > 0) { ?>
-                      <? for (var i = 0; i < siteData.recentPosts.length; i++) { var post = siteData.recentPosts[i]; ?>
-                        <li><a href="?id=<?= post.id ?>"><?= post.judul ?></a></li>
-                      <? } ?>
-                    <? } else { ?>
-                      <li>Tidak ada artikel.</li>
-                    <? } ?>
+                    <li>Memuat artikel...</li>
                 </ul>
             </div>
         </aside>
+
     </div>
 
     <!-- ====== FOOTER ====== -->
     <footer class="site-footer">
         <div class="container">
              <div class="footer-widgets">
-                <!-- widget-widget -->
-             </div>
+                <div class="footer-widget">
+                    <h4>About This Blog</h4>
+                    <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures. I hope you find it useful and inspiring!</p>
+                </div>
+                <div class="footer-widget">
+                    <h4>Important Links</h4>
+                    <ul class="category-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="tos.html">TOS</a></li>
+                        <li><a id="sitemap-link" href="#" target="_blank" rel="noopener noreferrer">Sitemap</a></li>
+                        <li><a id="rss-link" href="#" target="_blank" rel="noopener noreferrer">RSS Feed</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-widget">
+                    <h4>Follow Me</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="copyright">
                 <p>© 2024 Masandigital.com.❤.</p>
             </div>
@@ -178,49 +322,129 @@
 
     <script>
         // ===================================================================
-        // PENGATURAN CLIENT-SIDE (setelah render server)
+        // PENGATURAN
         // ===================================================================
-        const API_URL = "https://script.google.com/macros/s/AKfycbw4TFklzKMpxSx6KRCaw_iMbIaFh5WFCIuFIxyVFh1e1rZm58AefkNB0y1dYHXd40cpqg/exec"; // Disuntik dari server
-        const MY_DOMAIN = "<?= domain ?>";
-        const BASE_PATH = MY_DOMAIN;
+        const API_URL = "https://script.google.com/macros/s/AKfycbwXCHO_HJB2P1ix6zZISa7GHEX-e5lxIequ7puaaGt2rKOX1OZbb1bOShZ-S9ttEm8grw/exec"; // <-- GANTI DENGAN URL SCRIPT ANDA
         
-        // State awal disuntik dari server
-        let currentPage = <?= pageType === 'list' ? articleData.currentPage : 1 ?>;
-        let totalPages = <?= pageType === 'list' ? articleData.totalPages : 1 ?>;
+        // **[PENTING]** Mengambil domain saat ini secara otomatis
+        const MY_DOMAIN = window.location.origin; 
+        // ===================================================================
+
+        const BASE_PATH = window.location.pathname.replace('index.html', '');
+        let currentPage = 1;
+        let totalPages = 1;
         let isLoading = false;
-        let currentFilter = <?= pageType === 'list' ? currentFilter : 'null' ?>;
+        let currentFilter = null; 
 
         document.addEventListener("DOMContentLoaded", () => {
-            initializeDynamicElements();
+            initializeSite();
+            handleRouting();
         });
 
-        function initializeDynamicElements() {
-            // Fungsionalitas yang masih butuh JS setelah halaman dimuat
-            if (document.getElementById('load-more-btn')) {
-                document.getElementById('load-more-btn').addEventListener('click', () => {
-                    if (currentPage < totalPages && !isLoading) {
-                        currentPage++;
-                        loadMoreArticles(currentPage, currentFilter);
-                    }
-                });
-            }
+        function initializeSite() {
+            document.querySelectorAll('a[href="index.html"]').forEach(link => { link.href = BASE_PATH || './'; });
+            
+            // Memastikan link sitemap dan RSS menggunakan domain yang benar
+            document.getElementById('sitemap-link').href = `${API_URL}?action=sitemap&domain=${encodeURIComponent(MY_DOMAIN)}`;
+            document.getElementById('rss-link').href = `${API_URL}?action=rss&domain=${encodeURIComponent(MY_DOMAIN)}`;
 
-            if (document.getElementById('article-content-wrapper')) {
-                generateTOC();
-                generateSocialShareLinks();
+            document.getElementById('search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = document.getElementById('search-input').value.trim();
+                if (query) {
+                    window.location.href = `${BASE_PATH}?search=${encodeURIComponent(query)}`;
+                }
+            });
+
+            document.getElementById('load-more-btn').addEventListener('click', () => {
+                if (currentPage < totalPages && !isLoading) {
+                    currentPage++;
+                    loadArticleList(currentPage, true, currentFilter);
+                }
+            });
+        }
+        
+        async function handleRouting() {
+            const params = new URLSearchParams(window.location.search);
+            const articleId = params.get('id');
+            const categoryParam = params.get('kategori');
+            const searchParam = params.get('search');
+
+            const homepageView = document.getElementById('homepage-view');
+            const singleArticleView = document.getElementById('single-article-view');
+            
+            if (articleId) {
+                homepageView.style.display = 'none';
+                singleArticleView.style.display = 'block';
+                loadSingleArticle(articleId);
+            } else {
+                homepageView.style.display = 'block';
+                singleArticleView.style.display = 'none';
+                await loadInitialView(categoryParam, searchParam);
             }
         }
         
-        async function loadMoreArticles(page, filter = null) {
+        async function loadInitialView(category, search) {
+            const loading = document.getElementById("loading");
+            const errorEl = document.getElementById("error");
+            const pageTitleEl = document.getElementById('page-title');
+
+            loading.style.display = 'block';
+            errorEl.style.display = 'none';
+            document.getElementById('article-list-grid').innerHTML = '';
+
+            // **[PENTING]** Semua permintaan API sekarang menyertakan parameter domain
+            let queryParams = `action=getInitialView&domain=${encodeURIComponent(MY_DOMAIN)}`;
+            currentFilter = null; 
+
+            if (search) {
+                queryParams += `&search=${encodeURIComponent(search)}`;
+                pageTitleEl.innerHTML = `Hasil Pencarian: <span class="category-name">'${search}'</span>`;
+                currentFilter = { type: 'search', value: search };
+            } else if (category) {
+                queryParams += `&kategori=${encodeURIComponent(category)}`;
+                pageTitleEl.innerHTML = `Kategori: <span class="category-name">${category}</span>`;
+                currentFilter = { type: 'category', value: category };
+            } else {
+                pageTitleEl.textContent = 'Recent Articles';
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}?${queryParams}`);
+                if (!response.ok) throw new Error("Gagal mengambil data dari server!");
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+
+                populateNavigation(data.siteData.pages);
+                populateCategories(data.siteData.categories);
+                populateRecentPosts(data.siteData.recentPosts);
+                
+                displayArticleList(data.articleData.articles);
+                currentPage = data.articleData.currentPage;
+                totalPages = data.articleData.totalPages;
+                
+                document.getElementById('load-more-container').style.display = (currentPage < totalPages) ? 'block' : 'none';
+
+            } catch (error) {
+                errorEl.innerHTML = `<h2>Terjadi Kesalahan</h2><p>${error.message}</p>`;
+                errorEl.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+        
+        async function loadArticleList(page, isAppending = false, filter = null) {
             if (isLoading) return;
             isLoading = true;
 
             const loadMoreBtn = document.getElementById('load-more-btn');
-            loadMoreBtn.textContent = 'Memuat...';
-            loadMoreBtn.disabled = true;
+            if (isAppending) {
+                loadMoreBtn.textContent = 'Memuat...';
+                loadMoreBtn.disabled = true;
+            }
             
             let queryParams = `action=getArticles&page=${page}&limit=5&domain=${encodeURIComponent(MY_DOMAIN)}`;
-            if (filter && filter.value) {
+            if (filter) {
                 if (filter.type === 'category') queryParams += `&kategori=${encodeURIComponent(filter.value)}`;
                 else if (filter.type === 'search') queryParams += `&search=${encodeURIComponent(filter.value)}`;
             }
@@ -231,30 +455,36 @@
                 const data = await response.json();
                 if (data.error) throw new Error(data.error);
 
-                appendArticles(data.articles);
+                displayArticleList(data.articles, true);
                 currentPage = data.currentPage;
                 totalPages = data.totalPages;
 
-                if (currentPage >= totalPages) {
-                    document.getElementById('load-more-container').style.display = 'none';
-                }
+                document.getElementById('load-more-container').style.display = (currentPage < totalPages) ? 'block' : 'none';
 
             } catch (error) {
                 console.error("Gagal memuat lebih banyak artikel:", error);
                 alert("Gagal memuat lebih banyak artikel.");
             } finally {
                 isLoading = false;
-                loadMoreBtn.textContent = 'Load More Articles';
-                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = 'Muat Lebih Banyak';
+                loadMoreBtn.disabled = (currentPage >= totalPages);
             }
         }
         
-        function appendArticles(articles) {
+        function displayArticleList(articles, isAppending = false) {
             const container = document.getElementById("article-list-grid");
-            if (!articles || articles.length === 0) return;
+            if (!articles || articles.length === 0) {
+                if (!isAppending) {
+                    let noArticleMsg = "<h2>Tidak Ada Hasil</h2><p>Belum ada artikel yang dipublikasikan untuk domain ini.</p>";
+                    if(currentFilter?.type === 'category') noArticleMsg = `<h2>Tidak Ada Hasil</h2><p>Tidak ada artikel dalam kategori "${decodeURIComponent(currentFilter.value)}".</p>`
+                    if(currentFilter?.type === 'search') noArticleMsg = `<h2>Tidak Ada Hasil</h2><p>Tidak ada artikel yang cocok dengan pencarian "${decodeURIComponent(currentFilter.value)}".</p>`
+                    container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center;">${noArticleMsg}</div>`;
+                }
+                return;
+            }
 
             const articlesHtml = articles.map(article => {
-                const articleUrl = `?id=${article.id}`;
+                const articleUrl = `${BASE_PATH}?id=${article.id}`;
                 const imageUrl = article.gambar_fitur || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=60';
                 return `
                     <article class="article-card glass-effect">
@@ -273,27 +503,104 @@
                     </article>`;
             }).join('');
             
-            container.insertAdjacentHTML('beforeend', articlesHtml);
+            if (isAppending) {
+                container.insertAdjacentHTML('beforeend', articlesHtml);
+            } else {
+                container.innerHTML = articlesHtml;
+            }
         }
 
-        // --- Fungsi Helper untuk Halaman Artikel ---
-        function generateTOC() { /* Fungsi ini tetap sama, tidak perlu diubah */ }
-        function generateSocialShareLinks() { /* Fungsi ini tetap sama, tidak perlu diubah */ }
-        
-        // (Salin fungsi generateTOC dan generateSocialShareLinks dari kode lama Anda ke sini)
-         function generateTOC() {
-            const contentWrapper = document.getElementById('article-content-wrapper'); const tocContainer = document.getElementById('toc-container');
-            if (!contentWrapper || !tocContainer) return; const headings = contentWrapper.querySelectorAll('h2, h3'); if (headings.length < 2) { tocContainer.style.display = 'none'; return; }
-            let tocHTML = '<p class="toc-title"><i class="fa-solid fa-list-ol"></i> Daftar Isi</p><ul id="toc-list" class="toc-list">';
-            headings.forEach((heading, index) => { const id = 'heading-' + index; heading.id = id; const levelClass = heading.tagName === 'H3' ? 'class="toc-h3"' : ''; tocHTML += `<li ${levelClass}><a href="#${id}">${heading.textContent}</a></li>`; });
-            tocHTML += '</ul>';
-            tocContainer.innerHTML = tocHTML;
-            tocContainer.style.display = 'block';
+        async function loadSingleArticle(articleId) {
+            const container = document.getElementById("article-container");
+            const loading = document.getElementById("loading");
+            const errorEl = document.getElementById("error");
+            
+            try {
+                // **[PENTING]** Permintaan artikel tunggal juga menyertakan domain untuk validasi
+                const response = await fetch(`${API_URL}?id=${articleId}&domain=${encodeURIComponent(MY_DOMAIN)}`);
+                if (!response.ok) throw new Error("Artikel tidak ditemukan atau server error!");
+                const article = await response.json();
+                if (article.error) throw new Error(article.error);
+
+                loading.style.display = 'none';
+                document.getElementById("article-nav").style.visibility = 'visible';
+                
+                updateMetaTags('article', article);
+                
+                if (article.siteData) {
+                    populateNavigation(article.siteData.pages);
+                    populateCategories(article.siteData.categories);
+                    populateRecentPosts(article.siteData.recentPosts);
+                }
+
+                const featuredImageHtml = article.gambar_fitur ? `<img src="${article.gambar_fitur}" alt="${article.judul}" class="article-featured-image" loading="eager">` : '';
+
+                container.innerHTML = `
+                    ${featuredImageHtml}
+                    <h1 class="article-title">${article.judul}</h1>
+                    <div class="meta">
+                        <span><i class="fa-solid fa-user"></i> ${article.penulis}</span>
+                        <span><i class="fa-solid fa-calendar-days"></i> ${article.tanggal_publikasi}</span>
+                        ${article.kategori ? `<span><i class="fa-solid fa-tag"></i> ${article.kategori}</span>` : ''}
+                    </div>
+                    <div id="toc-container" class="toc-container glass-effect" style="display:none;"></div>
+                    <div id="article-content-wrapper" class="article-content">${article.konten}</div>
+                    <div id="social-share-container" class="social-share-container" style="display:none;"></div>
+                `;
+                
+                generateSocialShareLinks(article);
+                generateTOC();
+
+                if (article.relatedArticles && article.relatedArticles.length > 0) {
+                    displayRelatedArticles(article.relatedArticles);
+                }
+
+                const navPrev = document.getElementById('nav-prev');
+                const navNext = document.getElementById('nav-next');
+                navPrev.href = article.prevId ? `${BASE_PATH}?id=${article.prevId}` : '#';
+                navPrev.style.visibility = article.prevId ? 'visible' : 'hidden';
+                navNext.href = article.nextId ? `${BASE_PATH}?id=${article.nextId}` : '#';
+                navNext.style.visibility = article.nextId ? 'visible' : 'hidden';
+
+            } catch (error) {
+                loading.style.display = 'none';
+                document.getElementById('single-article-view').style.display = 'none';
+                errorEl.innerHTML = `<h2>404 - Artikel Tidak Ditemukan</h2><p>${error.message}</p><p>Anda akan dialihkan ke halaman utama dalam 5 detik.</p>`;
+                errorEl.style.display = 'block';
+                setTimeout(() => { window.location.href = BASE_PATH || './'; }, 5000);
+            }
         }
-         function generateSocialShareLinks() {
+        
+        function updateMetaTags(type, data) {
+            const siteTitle = "Masandigital.com";
+            const defaultImage = document.getElementById('og-image').content;
+            const baseUrl = window.location.origin + BASE_PATH;
+            let title, description, imageUrl, url, ogType;
+            if (type === 'article' && data) {
+                title = `${data.judul} | ${siteTitle}`;
+                description = data.cuplikan || (data.konten ? data.konten.substring(0, 155).replace(/<[^>]*>/g, '') + '...' : 'Baca selengkapnya...');
+                imageUrl = data.gambar_fitur || defaultImage;
+                url = `${baseUrl}?id=${data.id}`;
+                ogType = 'article';
+            } else { 
+                title = data.title || siteTitle;
+                description = data.description || "A personal blog about technology, design, and life adventures.";
+                imageUrl = defaultImage;
+                url = window.location.href;
+                ogType = 'website';
+            }
+            document.title = title;
+            document.getElementById('meta-description').setAttribute('content', description);
+            document.getElementById('og-title').setAttribute('content', title);
+            document.getElementById('og-description').setAttribute('content', description);
+            document.getElementById('og-image').setAttribute('content', imageUrl);
+            document.getElementById('og-url').setAttribute('content', url);
+            document.getElementById('og-type').setAttribute('content', ogType);
+        }
+        
+        function generateSocialShareLinks(article) {
             const container = document.getElementById('social-share-container'); if (!container) return;
-            const articleUrl = encodeURIComponent(window.location.href); 
-            const articleTitle = encodeURIComponent(document.querySelector('.article-title').textContent);
+            const articleUrl = encodeURIComponent(`${MY_DOMAIN}${BASE_PATH}?id=${article.id}`); const articleTitle = encodeURIComponent(article.judul);
             const shareLinks = {
                 facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
                 twitter: `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`,
@@ -304,7 +611,41 @@
             container.innerHTML = `<h3 class="social-share-title">Share this article</h3><div class="social-share-buttons"><a href="${shareLinks.facebook}" target="_blank" rel="noopener noreferrer" class="share-facebook" aria-label="Bagikan ke Facebook"><i class="fab fa-facebook-f"></i></a><a href="${shareLinks.twitter}" target="_blank" rel="noopener noreferrer" class="share-twitter" aria-label="Bagikan ke Twitter"><i class="fab fa-twitter"></i></a><a href="${shareLinks.linkedin}" target="_blank" rel="noopener noreferrer" class="share-linkedin" aria-label="Bagikan ke LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="${shareLinks.whatsapp}" target="_blank" rel="noopener noreferrer" class="share-whatsapp" aria-label="Bagikan ke WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="${shareLinks.email}" class="share-email" aria-label="Bagikan via Email"><i class="fas fa-envelope"></i></a></div>`;
             container.style.display = 'block';
         }
-
+        
+        function populateNavigation(pages) {
+            const navList = document.getElementById('main-nav-list'); if (!navList) return;
+            const params = new URLSearchParams(window.location.search); const isHomePage = !params.has('id') && !params.has('kategori') && !params.has('search');
+            let navHtml = `<li><a href="${BASE_PATH || './'}" class="${isHomePage ? 'active' : ''}">Home</a></li>`;
+            if (pages && pages.length > 0) { navHtml += pages.map(page => `<li><a href="${page.url}">${page.title}</a></li>`).join(''); }
+            const staticPages = [ { title: 'About', url: 'about.html' }, { title: 'Contact', url: 'contact.html' }, { title: 'Disclaimer', url: 'disclaimer.html' }, { title: 'Privacy Policy', url: 'privacy-policy.html' }, { title: 'TOS', url: 'tos.html' } ];
+            navHtml += staticPages.map(page => `<li><a href="${BASE_PATH}${page.url}">${page.title}</a></li>`).join('');
+            navList.innerHTML = navHtml;
+        }
+        function populateCategories(categories) {
+            const listContainer = document.getElementById('sidebar-category-list'); if (!listContainer) return;
+            if (categories && categories.length > 0) { listContainer.innerHTML = categories.map(category => `<li><a href="${BASE_PATH}?kategori=${encodeURIComponent(category)}">${category}</a></li>`).join(''); } else { listContainer.innerHTML = '<li>Tidak ada kategori.</li>'; }
+        }
+        function populateRecentPosts(posts) {
+            const listContainer = document.getElementById('recent-posts-list'); if (!listContainer) return;
+            if (posts && posts.length > 0) { listContainer.innerHTML = posts.map(post => `<li><a href="${BASE_PATH}?id=${post.id}">${post.judul}</a></li>`).join(''); } else { listContainer.innerHTML = '<li>Tidak ada artikel.</li>'; }
+        }
+        function generateTOC() {
+            const contentWrapper = document.getElementById('article-content-wrapper'); const tocContainer = document.getElementById('toc-container');
+            if (!contentWrapper || !tocContainer) return; const headings = contentWrapper.querySelectorAll('h2, h3'); if (headings.length < 2) { tocContainer.style.display = 'none'; return; }
+            let tocHTML = '<p class="toc-title"><i class="fa-solid fa-list-ol"></i> Daftar Isi</p><ul id="toc-list" class="toc-list">';
+            headings.forEach((heading, index) => { const id = 'heading-' + index; heading.id = id; const levelClass = heading.tagName === 'H3' ? 'class="toc-h3"' : ''; tocHTML += `<li ${levelClass}><a href="#${id}">${heading.textContent}</a></li>`; });
+            tocHTML += '</ul>';
+            tocContainer.innerHTML = tocHTML;
+            tocContainer.style.display = 'block';
+        }
+        function displayRelatedArticles(relatedArticles) {
+            const container = document.getElementById('related-posts'); const grid = document.getElementById('related-posts-grid');
+            if (!container || !grid || !relatedArticles || relatedArticles.length === 0) { container.style.display = 'none'; return; }
+            grid.innerHTML = relatedArticles.map(article => { const articleUrl = `${BASE_PATH}?id=${article.id}`; const imageUrl = article.gambar_fitur || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=60';
+                return `<article class="article-card glass-effect"><div class="card-image"><a href="${articleUrl}"><img src="${imageUrl}" alt="${article.judul}" loading="lazy" width="400" height="160"></a><span class="card-category">${article.kategori || 'Umum'}</span></div><div class="card-content"><h3 class="card-title" style="font-size: 1.2rem;"><a href="${articleUrl}">${article.judul}</a></h3></div></article>`;
+            }).join('');
+            container.style.display = 'block';
+        }
     </script>
 </body>
 </html>
