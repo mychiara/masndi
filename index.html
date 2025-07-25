@@ -6,344 +6,240 @@
     
     <title>Masandigital.com</title>
     
-    <link rel="canonical" href="https://Masandigital.com"> <!-- Ganti dengan URL kanonis yang sebenarnya -->
-    
+    <!-- URL kanonis menunjuk ke versi non-AMP jika ada, atau ke dirinya sendiri jika hanya ada versi AMP -->
+    <link rel="canonical" href="https://masandigital.com/theme.amp.html">
+
+    <!-- Meta Tags (Sama seperti sebelumnya) -->
     <meta name="description" content="A personal blog about technology, design, and life adventures—told through inspiring stories and stunning visuals. Explore ideas, works, and journeys.">
     <meta property="og:title" content="Masandigital.com">
     <meta property="og:description" content="A personal blog about technology, design, and life adventures. Explore stories, creativity, and inspiration.">
     <meta property="og:image" content="https://i.pravatar.cc/150?img=32">
     <meta property="og:url" content="https://Masandigital.com">
     <meta property="og:type" content="website">
-    <meta name="google-site-verification" content="4iOW_hDD8B-IRUAm7keHj2sZFwbLoXV_jQCJV-4CWsY" />
-    <meta name="google-site-verification" content="QV9FBw9pHOPWT746Ft1PLsRHIv-2KZwr0dAOEt6YmYQ" />
 
-    <!-- AMP Scripts -->
+    <!-- Skrip Wajib AMP -->
     <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <!-- Komponen AMP yang akan kita gunakan -->
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
-    <script async custom-element="amp-state" src="https://cdn.ampproject.org/v0/amp-state-0.1.js"></script>
-    <script async custom-element="amp-access" src="https://cdn.ampproject.org/v0/amp-access-0.1.js"></script>
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
-    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
-    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap">
+
+    <!--
+      GAYA CSS UNTUK AMP
+      Semua CSS harus berada di dalam satu tag <style amp-custom>.
+      Ukuran total CSS tidak boleh lebih dari 75KB.
+      Aturan seperti !important dilarang.
+    -->
+    <style amp-custom>
+        :root {
+            --bg-dark: #0d0d1a;
+            --bg-surface: rgba(255, 255, 255, 0.07);
+            --bg-surface-hover: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary-glow: #ff00c1;
+            --secondary-glow: #9a00ff;
+            --accent-color: #00e5ff;
+            --text-light: #e0e0e0;
+            --text-medium: #a0a0a0;
+            --text-dark: #ffffff;
+            --danger-color: #ff4d6d;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --border-radius: 16px;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(-45deg, var(--secondary-glow), var(--primary-glow), #00e5ff, #ff8c00);
+            background-size: 400% 400%;
+            animation: gradient-flow 20s ease infinite;
+            z-index: -1;
+            opacity: 0.4;
+            filter: blur(100px);
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--text-dark); }
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+        .glass-effect {
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+        }
+        .site-header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 26, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .site-header .logo a { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); }
+        .main-nav ul { list-style: none; display: flex; gap: 15px; flex-wrap: wrap; }
+        .main-nav ul li a { padding: 10px 20px; font-weight: 600; color: var(--text-light); border-radius: 50px; }
+        .hero-section { text-align: center; padding: 5rem 0; margin-bottom: 3rem; }
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-glow), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-medium); max-width: 600px; margin: 0 auto 2rem; }
+        .page-title { font-size: 2.8rem; margin-bottom: 2rem; padding-bottom: 10px; border-bottom: 2px solid var(--glass-border); display: inline-block; }
+        #article-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        .article-card { display: flex; flex-direction: column; }
+        .card-image { position: relative; }
+        .card-image .card-category { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: var(--bg-dark); padding: 5px 15px; border-radius: 50px; font-size: .8rem; font-weight: 700; text-transform: uppercase; }
+        .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title a { font-size: 1.4rem; color: var(--text-dark); }
+        .card-excerpt { color: var(--text-medium); margin: 15px 0; flex-grow: 1; }
+        .card-meta { font-size: .85em; color: var(--text-medium); display: flex; flex-wrap: wrap; gap: 15px; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: auto; }
+        .sidebar { padding-top: 40px; }
+        .sidebar .widget { padding: 25px; margin-bottom: 30px; }
+        .widget-title { font-size: 1.4rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+        .widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, var(--primary-glow), var(--accent-color)); border-radius: 2px; }
+        .category-list { list-style: none; padding: 0; }
+        .category-list li { margin-bottom: 10px; }
+        .category-list li a { font-weight: 500; color: var(--text-medium); padding: 8px 0; display: block; }
+        #search-input { width: 100%; padding: 14px 20px; font-size: 1rem; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 50px; color: var(--text-light); }
+        .site-footer { background: #080812; color: var(--text-medium); padding: 50px 0 0; margin-top: 50px; border-top: 1px solid var(--glass-border); }
+        .copyright { padding: 25px 0; font-size: .9em; text-align: center; }
+        .placeholder-spinner { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,.1); border-top-color: var(--accent-color); border-radius: 50%; animation: 1s linear infinite spin; margin: 2rem auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Font Awesome tidak bisa diload eksternal. Idealnya, copy-paste hanya ikon yg dibutuhkan dari file CSS Font Awesome ke sini */
+        /* Placeholder untuk ikon (gunakan inline SVG atau class jika CSS-nya ditambahkan manual) */
+        .fa { display: inline-block; font-style: normal; font-variant: normal; text-rendering: auto; -webkit-font-smoothing: antialiased; }
+        .fa-user:before { content: "👤"; margin-right: 8px; } /* Ganti dengan unicode atau SVG */
+        .fa-calendar-days:before { content: "📅"; margin-right: 8px; } /* Ganti dengan unicode atau SVG */
+        @media (max-width: 992px) { .main-wrapper { display: block; } .sidebar { margin-top: 50px; } .hero-title { font-size: 3rem; } }
+        @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } .page-title { font-size: 2.2rem; } .site-header .container { flex-direction: column; gap: 20px; } .main-nav ul { justify-content: center; } }
+    </style>
     
-    <!-- AMP CSS -->
-<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-
-<style amp-custom>
-    :root {
-        --bg-dark: #0d0d1a; --bg-surface: rgba(255, 255, 255, 0.07); --bg-surface-hover: rgba(255, 255, 255, 0.12); --glass-border: rgba(255, 255, 255, 0.1); --primary-glow: #ff00c1; --secondary-glow: #9a00ff; --accent-color: #00e5ff; --text-light: #e0e0e0; --text-medium: #a0a0a0; --text-dark: #ffffff; --danger-color: #ff4d6d; --font-heading: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif; --border-radius: 16px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); color: var(--text-light); background-color: var(--bg-dark); line-height: 1.7; overflow-x: hidden; position: relative; }
-    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(-45deg, var(--secondary-glow), var(--primary-glow), #00e5ff, #ff8c00); background-size: 400% 400%; animation: gradient-flow 20s ease infinite; z-index: -1; opacity: 0.4; filter: blur(100px); }
-    @keyframes gradient-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-    a { color: var(--accent-color); text-decoration: none; transition: color 0.3s ease; } a:hover { color: var(--text-dark); }
-    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; color: var(--text-dark); line-height: 1.3; }
-    .glass-effect { background: var(--bg-surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius); }
-    .site-header { padding: 1.5rem 0; position: sticky; top: 0; z-index: 1000; background: rgba(13, 13, 26, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--glass-border); }
-    .site-header .container { display: flex; justify-content: space-between; align-items: center; }
-    .site-header .logo a { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); text-shadow: 0 0 5px var(--primary-glow); }
-    .main-nav { display: none; } /* Hide on mobile, use sidebar */
-    .hamburger { display: block; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; z-index: 1001; }
-    .hero-section { text-align: center; padding: 5rem 0; margin-bottom: 3rem; }
-    .hero-title { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(90deg, var(--primary-glow), var(--accent-color)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero-subtitle { font-size: 1.2rem; color: var(--text-medium); max-width: 600px; margin: 0 auto 2rem; }
-    .main-wrapper { display: grid; grid-template-columns: 1fr 340px; gap: 40px; padding: 40px 0; }
-    .content-area { min-width: 0; } .sidebar { flex-shrink: 0; }
-    .page-title { font-size: 2.8rem; margin-bottom: 2rem; padding-bottom: 10px; border-bottom: 2px solid var(--glass-border); display: inline-block; }
-    .page-title .category-name { color: var(--accent-color); }
-    .article-list-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-    .article-card { display: flex; flex-direction: column; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: var(--border-radius); }
-    .card-image { position: relative; }
-    .card-image amp-img { border-radius: var(--border-radius) var(--border-radius) 0 0; }
-    .card-category { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: var(--bg-dark); padding: 5px 15px; border-radius: 50px; font-size: .8rem; font-weight: 700; text-transform: uppercase; }
-    .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-    .card-title a { font-size: 1.4rem; color: var(--text-dark); }
-    .card-excerpt { color: var(--text-medium); margin: 15px 0; flex-grow: 1; }
-    .card-meta { font-size: .85em; color: var(--text-medium); display: flex; flex-wrap: wrap; gap: 15px; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: auto; }
-    .card-meta svg { width: 1em; height: 1em; margin-right: 8px; fill: var(--accent-color); vertical-align: middle; }
-    .single-article { padding: 40px; }
-    .single-article h1.article-title { font-size: 3rem; margin-bottom: 20px; line-height: 1.2; }
-    .single-article .meta { display: flex; flex-wrap: wrap; gap: 15px 30px; font-size: 1em; color: var(--text-medium); margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); }
-    .single-article .meta svg { width: 1em; height: 1em; margin-right: 8px; fill: var(--accent-color); vertical-align: middle;}
-    .article-content { font-size: 1.1rem; }
-    .article-content p { margin-bottom: 1.5em; }
-    .article-content h2, .article-content h3 { margin: 2em 0 1em; padding-bottom: 0.5em; border-bottom: 1px solid var(--glass-border); }
-    .article-content amp-img { max-width: 100%; border-radius: 12px; margin: 2em 0; }
-    .related-posts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-    .related-posts-title { font-size: 2.2rem; margin-bottom: 30px; border-bottom: 2px solid var(--glass-border); padding-bottom: 10px; display: inline-block; }
-    .article-navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); }
-    .nav-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-family: var(--font-heading); background: var(--bg-surface); border: 1px solid var(--glass-border); color: var(--text-light); }
-    .sidebar .widget { padding: 25px; margin-bottom: 30px; }
-    .widget-title { font-size: 1.4rem; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
-    .widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: linear-gradient(90deg, var(--primary-glow), var(--accent-color)); border-radius: 2px; }
-    .sidebar .profile-pic { border-radius: 50%; display: block; margin: 0 auto 15px; border: 4px solid; border-image: linear-gradient(to right, var(--primary-glow), var(--accent-color)) 1; }
-    .category-list li { margin-bottom: 10px; }
-    .category-list li a { font-weight: 500; color: var(--text-medium); padding: 8px 0; display: block; }
-    #search-input { width: 100%; padding: 14px 20px; font-size: 1rem; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 50px; color: var(--text-light); }
-    .site-footer { background: #080812; color: var(--text-medium); padding: 50px 0 0; margin-top: 50px; border-top: 1px solid var(--glass-border); }
-    .footer-widgets { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--glass-border); }
-    .copyright { padding: 25px 0; font-size: .9em; text-align: center; }
-    .loading-placeholder, .error-placeholder { padding: 50px; text-align: center; }
-    .spinner { width: 50px; height: 50px; border: 5px solid rgba(255,255,255,.1); border-top-color: var(--accent-color); border-radius: 50%; animation: 1s linear infinite spin; margin: 0 auto 15px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .load-more-container { text-align: center; margin-top: 40px; }
-    .load-more-button { border: none; padding: 15px 40px; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); border-radius: 50px; cursor: pointer; color: var(--text-dark); background: linear-gradient(90deg, var(--secondary-glow), var(--primary-glow)); }
-    .social-share-container { margin: 40px 0; padding-top: 25px; border-top: 1px solid var(--glass-border); }
-    .social-share-title { font-size: 1.2rem; text-align: center; margin-bottom: 20px; }
-    amp-social-share { border-radius: 50%; background: var(--bg-surface); margin: 0 5px; }
-    amp-sidebar { background: var(--bg-dark); width: 300px; padding: 20px; }
-    .sidebar-nav ul { list-style: none; padding: 0; } .sidebar-nav a { color: var(--text-light); display: block; padding: 10px; font-size: 1.1rem; }
-    .nav-button-icon-only { padding: 12px; width: 55px; height: 55px; justify-content: center; gap: 0; font-size: 1.2rem; }
-    @media (min-width: 993px) { .hamburger { display: none; } .main-nav { display: block; } }
-    @media (max-width: 992px) { .main-wrapper { grid-template-columns: 1fr; } .sidebar { margin-top: 50px; } }
-    @media (max-width: 768px) { .site-header .container { flex-direction: row; } .hero-title { font-size: 2.5rem; } }
-</style>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Boilerplate AMP Wajib -->
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 </head>
 <body>
-    <!-- SVG Icon Definitions for AMP -->
-    <svg width="0" height="0" style="position:absolute">
-      <symbol id="icon-user" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></symbol>
-      <symbol id="icon-calendar" viewBox="0 0 448 512"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192z"/></symbol>
-      <symbol id="icon-tag" viewBox="0 0 448 512"><path d="M0 80V229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7H80C35.8 32 0 67.8 0 112zM64 112a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/></symbol>
-      <symbol id="icon-arrow-left" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></symbol>
-      <symbol id="icon-arrow-right" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></symbol>
-      <symbol id="icon-home" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H128.1c-1.5 0-3-.1-4.5-.2c-1.1 .1-2.2 .2-3.3 .2H80c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 53 43 96 96 96h352c53 0 96-43 96-96V287.6c17-.1 32-14.1 32-32.1zM387.9 17.2c-17.7-17.7-46.3-17.7-64 0L73.9 181.1c-15.1 15.1-4.2 42.1 17.7 42.1H128V352c0 17.7 14.3 32 32 32H224c17.7 0 32-14.3 32-32V224h64v128c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32V224h36.1c21.9 0 32.8-27 17.7-42.1L387.9 17.2z"/></symbol>
-    </svg>
-    
-    <!-- PENGATURAN -->
-    <amp-state id="config">
-      <script type="application/json">
-        {
-          "apiUrl": "https://script.google.com/macros/s/AKfycbyuvfCKRMeSJB1_uH-VtpznDLTuu90R49BT2a-wctpNvY-X0ei_Uh7Zf2F3td2G56zJnw/exec",
-          "domain": "https://Masandigital.com",
-          "basePath": "/"
-        }
-      </script>
-    </amp-state>
-
-    <!-- State Manager -->
-    <amp-access>
-      <script type="application/json">
-        {
-          "authorization": "{{config.apiUrl}}?action=getInitialState&domain={{config.domain}}&id=ACCESS_READER_ID&url=CANONICAL_URL",
-          "noPingback": true
-        }
-      </script>
-    </amp-access>
-    <amp-state id="viewState"></amp-state>
-
 
     <!-- ====== HEADER ====== -->
     <header class="site-header">
         <div class="container">
             <div class="logo">
-                <a [href]="config.basePath" href="/">Masandigital.com</a>
+                <a href="/">Masandigital.com</a>
             </div>
             <nav class="main-nav">
-                <!-- Navigasi desktop (opsional, bisa diisi statis/dinamis) -->
-            </nav>
-            <button class="hamburger" on="tap:sidebar.toggle" aria-label="Open Menu">☰</button>
-        </div>
-    </header>
-
-    <!-- ====== SIDEBAR ====== -->
-    <amp-sidebar id="sidebar" layout="nodisplay" side="right">
-        <div class="widget">
-            <h3 class="widget-title">About Me</h3>
-            <amp-img src="https://masandigital.com/assets/images/author-photo.jpeg" width="100" height="100" layout="responsive" alt="Foto profil" class="profile-pic"></amp-img>
-            <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures.</p>
-        </div>
-        <div class="widget">
-             <h3 class="widget-title">Navigation</h3>
-             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <!-- Tautan statis lainnya -->
+                   <li><a href="/">Home</a></li>
+                   <li><a href="/about.html">About</a></li>
+                   <li><a href="/contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="widget">
-            <h3 class="widget-title">Categories</h3>
-            <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="config.apiUrl + '?action=getCategories&domain=' + config.domain">
-                <template type="amp-mustache">
-                    <li><a href="?kategori={{.}}">{{.}}</a></li>
-                </template>
-                <div placeholder class="loading-placeholder">Memuat kategori...</div>
-            </amp-list>
-        </div>
-        <div class="widget">
-            <h3 class="widget-title">Latest Articles</h3>
-             <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="config.apiUrl + '?action=getRecentPosts&domain=' + config.domain">
-                <template type="amp-mustache">
-                    <li><a [href]="config.basePath + '?id=' + id">{{judul}}</a></li>
-                </template>
-                <div placeholder class="loading-placeholder">Memuat artikel...</div>
-            </amp-list>
-        </div>
-    </amp-sidebar>
+    </header>
 
-    <!-- ====== MAIN WRAPPER (Konten + Sidebar) ====== -->
+    <!-- ====== MAIN WRAPPER ====== -->
     <div class="main-wrapper container">
 
         <!-- ====== KONTEN UTAMA ====== -->
         <main class="content-area">
             
-            <!-- HOMEPAGE VIEW -->
-            <div id="homepage-view" [hidden]="viewState.view != 'home'">
-                <section class="hero-section">
-                    <h1 class="hero-title">Where Ideas Begin, and Inspiration Never Ends</h1>
-                    <p class="hero-subtitle">A personal blog about technology, design, and life adventures—wrapped in stunning and immersive visuals.</p>
-                    <div class="hero-search">
-                         <form id="search-form" method="GET" action="." target="_top">
-                            <input type="search" name="search" id="search-input" placeholder="Explore content..." required [value]="viewState.filterType == 'search' ? viewState.filterValue : ''">
-                        </form>
-                    </div>
-                </section>
+            <section class="hero-section">
+                <h1 class="hero-title">Where Ideas Begin, and Inspiration Never Ends</h1>
+                <p class="hero-subtitle">A personal blog about technology, design, and life adventures—wrapped in stunning and immersive visuals.</p>
+            </section>
+
+            <h2 class="page-title">Recent Articles</h2>
+
+            <!--
+              ================================================================
+              INTI DARI SOLUSI AMP: MENGGUNAKAN AMP-LIST
+              ================================================================
+              - 'amp-list' akan memanggil API Google Apps Script Anda.
+              - Ganti API_URL dengan URL script Anda.
+              - Ganti MY_DOMAIN dengan domain blog Anda.
+              - 'items="articleData.articles"' memberi tahu amp-list untuk mengulang array 'articles' di dalam objek 'articleData' dari JSON response.
+              - Template 'amp-mustache' akan me-render setiap item artikel.
+            -->
+            <amp-list width="auto" height="500"
+                src="https://script.google.com/macros/s/AKfycbyuvfCKRMeSJB1_uH-VtpznDLTuu90R49BT2a-wctpNvY-X0ei_Uh7Zf2F3td2G56zJnw/exec"
+                layout="responsive"
+                items="articleData.articles">
                 
-                <h2 class="page-title" [text]="viewState.pageTitle">Recent Articles</h2>
+                <div placeholder>
+                    <div class="placeholder-spinner"></div>
+                </div>
 
-                <amp-list class="article-list-grid" width="auto" height="1000" layout="responsive" [src]="config.apiUrl + '?action=getPaginatedArticles&domain=' + config.domain + (viewState.filterQuery || '')" load-more="manual" load-more-bookmark="next">
-                    <template type="amp-mustache">
-                        <article class="article-card">
-                            <div class="card-image">
-                                <a [href]="config.basePath + '?id=' + id">
-                                    <amp-img [src]="gambar_fitur || 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=60'" width="400" height="220" layout="responsive" alt="{{judul}}"></amp-img>
-                                </a>
-                                {{#kategori}}
-                                <span class="card-category">{{kategori}}</span>
-                                {{/kategori}}
-                            </div>
-                            <div class="card-content">
-                                <h2 class="card-title"><a [href]="config.basePath + '?id=' + id">{{judul}}</a></h2>
-                                <p class="card-excerpt">{{cuplikan}}</p>
-                                <div class="card-meta">
-                                    <span><svg><use href="#icon-user"></use></svg> {{penulis}}</span>
-                                    <span><svg><use href="#icon-calendar"></use></svg> {{tanggal_publikasi}}</span>
-                                </div>
-                            </div>
-                        </article>
-                    </template>
-                    <div fallback class="error-placeholder">
-                        <h2>No Articles Found</h2>
-                        <p>There are no articles matching your criteria.</p>
-                    </div>
-                    <div placeholder class="loading-placeholder"><div class="spinner"></div><p>Loading Articles...</p></div>
-                    <div load-more class="load-more-container">
-                        <button class="load-more-button">Load More Articles</button>
-                    </div>
-                </amp-list>
-            </div>
+                <div fallback>
+                    <h2>Gagal memuat artikel.</h2>
+                    <p>Silakan coba lagi nanti.</p>
+                </div>
 
-            <!-- SINGLE ARTICLE VIEW -->
-            <div id="single-article-view" [hidden]="viewState.view != 'article'">
-                <amp-list width="auto" height="1500" layout="responsive" [src]="config.apiUrl + '?action=getSingleArticle&domain=' + config.domain + '&id=' + viewState.articleId">
-                    <template type="amp-mustache">
-                    <article class="single-article glass-effect">
-                        {{#gambar_fitur}}
-                        <amp-img src="{{gambar_fitur}}" width="800" height="450" layout="responsive" alt="{{judul}}" class="article-featured-image"></amp-img>
-                        {{/gambar_fitur}}
-                        <h1 class="article-title">{{judul}}</h1>
-                        <div class="meta">
-                            <span><svg><use href="#icon-user"></use></svg> {{penulis}}</span>
-                            <span><svg><use href="#icon-calendar"></use></svg> {{tanggal_publikasi}}</span>
-                            {{#kategori}}
-                            <span><svg><use href="#icon-tag"></use></svg> {{kategori}}</span>
-                            {{/kategori}}
+                <template type="amp-mustache">
+                    <article class="article-card glass-effect">
+                        <div class="card-image">
+                            <a href="?id={{id}}">
+                                <amp-img src="{{gambar_fitur}}" width="400" height="220" layout="responsive" alt="{{judul}}">
+                                    <amp-img fallback src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=60" width="400" height="220" layout="responsive" alt="Placeholder Image"></amp-img>
+                                </amp-img>
+                            </a>
+                            <span class="card-category">{{kategori}}</span>
                         </div>
-                        <div class="article-content">{{{konten}}}</div>
-                        
-                        <div class="social-share-container">
-                            <h3 class="social-share-title">Share this article</h3>
-                            <amp-social-share type="facebook" data-param-app_id="YOUR_FB_APP_ID"></amp-social-share>
-                            <amp-social-share type="twitter"></amp-social-share>
-                            <amp-social-share type="linkedin"></amp-social-share>
-                            <amp-social-share type="whatsapp"></amp-social-share>
-                            <amp-social-share type="email"></amp-social-share>
+                        <div class="card-content">
+                            <h2 class="card-title"><a href="?id={{id}}">{{judul}}</a></h2>
+                            <p class="card-excerpt">{{cuplikan}}</p>
+                            <div class="card-meta">
+                                <span><i class="fa fa-user"></i> {{penulis}}</span>
+                                <span><i class="fa fa-calendar-days"></i> {{tanggal_publikasi}}</span>
+                            </div>
                         </div>
                     </article>
+                </template>
+            </amp-list>
 
-                    <!-- RELATED POSTS -->
-                    {{#relatedArticles.length}}
-                    <section class="related-posts">
-                        <h2 class="related-posts-title">Read Also</h2>
-                        <div class="related-posts-grid">
-                        {{#relatedArticles}}
-                            <article class="article-card">
-                                <div class="card-image">
-                                    <a [href]="config.basePath + '?id=' + id">
-                                        <amp-img [src]="gambar_fitur || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=60'" width="400" height="160" layout="responsive" alt="{{judul}}"></amp-img>
-                                    </a>
-                                     {{#kategori}}
-                                    <span class="card-category">{{kategori}}</span>
-                                    {{/kategori}}
-                                </div>
-                                <div class="card-content">
-                                    <h3 class="card-title" style="font-size: 1.2rem;"><a [href]="config.basePath + '?id=' + id">{{judul}}</a></h3>
-                                </div>
-                            </article>
-                        {{/relatedArticles}}
-                        </div>
-                    </section>
-                    {{/relatedArticles.length}}
-                    
-                     <!-- NAVIGATION -->
-                    <nav class="article-navigation">
-                        <a [href]="prevId ? config.basePath + '?id=' + prevId : '#'" class="nav-button prev" [class]="!prevId ? 'hidden' : ''">
-                            <svg class="nav-button-icon-only"><use href="#icon-arrow-left"></use></svg>
-                        </a>
-                        <a [href]="config.basePath" class="nav-button home">
-                            <svg class="nav-button-icon-only"><use href="#icon-home"></use></svg>
-                        </a>
-                        <a [href]="nextId ? config.basePath + '?id=' + nextId : '#'" class="nav-button next" [class]="!nextId ? 'hidden' : ''">
-                            <svg class="nav-button-icon-only"><use href="#icon-arrow-right"></use></svg>
-                        </a>
-                    </nav>
-
-                    </template>
-                     <div placeholder class="loading-placeholder"><div class="spinner"></div><p>Loading Article...</p></div>
-                     <div fallback class="error-placeholder">
-                        <h2>404 - Article Not Found</h2>
-                        <p>The requested article could not be found for this domain.</p>
-                     </div>
-                </amp-list>
-            </div>
         </main>
 
-        <!-- ====== SIDEBAR (Desktop) ====== -->
-        <aside class="sidebar" [hidden]="viewState.view != 'home'">
+        <!-- ====== SIDEBAR (dibuat statis atau mengambil data dari amp-list lain jika perlu) ====== -->
+        <aside class="sidebar">
             <div class="widget glass-effect">
                 <h3 class="widget-title">About Me</h3>
                 <amp-img src="https://masandigital.com/assets/images/author-photo.jpeg" width="100" height="100" layout="responsive" alt="Foto profil" class="profile-pic"></amp-img>
-                <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures. I hope you find it useful and inspiring!</p>
+                <p>Welcome! This blog is my personal space to share ideas about technology, design, and life adventures.</p>
             </div>
+            <!-- Untuk kategori dinamis, Anda perlu amp-list lain yang menargetkan 'siteData.categories' -->
             <div class="widget glass-effect">
                 <h3 class="widget-title">Categories</h3>
-                 <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="config.apiUrl + '?action=getCategories&domain=' + config.domain">
-                    <template type="amp-mustache">
-                        <li><a href="?kategori={{.}}">{{.}}</a></li>
-                    </template>
-                    <div placeholder class="loading-placeholder">Memuat kategori...</div>
-                </amp-list>
-            </div>
-            <div class="widget glass-effect">
-                <h3 class="widget-title">Latest Articles</h3>
-                <amp-list class="category-list" width="auto" height="200" layout="fixed-height" [src]="config.apiUrl + '?action=getRecentPosts&domain=' + config.domain">
-                    <template type="amp-mustache">
-                        <li><a [href]="config.basePath + '?id=' + id">{{judul}}</a></li>
-                    </template>
-                    <div placeholder class="loading-placeholder">Memuat artikel...</div>
-                </amp-list>
+                <ul class="category-list">
+                    <li><a href="/?kategori=Teknologi">Teknologi</a></li>
+                    <li><a href="/?kategori=Desain">Desain</a></li>
+                    <li><a href="/?kategori=Tutorial">Tutorial</a></li>
+                </ul>
             </div>
         </aside>
 
@@ -352,14 +248,11 @@
     <!-- ====== FOOTER ====== -->
     <footer class="site-footer">
         <div class="container">
-             <div class="footer-widgets">
-                <!-- Footer content remains largely static -->
-             </div>
             <div class="copyright">
                 <p>© 2024 Masandigital.com.❤.</p>
             </div>
         </div>
     </footer>
+
 </body>
 </html>
---- END OF FILE theme.html ---
